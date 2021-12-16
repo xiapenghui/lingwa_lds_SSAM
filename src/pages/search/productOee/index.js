@@ -71,7 +71,6 @@ const productOeeComponent = ({ productOee, dispatch }) => {
       fixed: "left",
     },
 
- 
     {
       title: "UT",
       dataIndex: "ut",
@@ -101,6 +100,13 @@ const productOeeComponent = ({ productOee, dispatch }) => {
     },
 
     {
+      title: "SPT",
+      dataIndex: "SPT",
+      align: "center",
+      width: 100,
+    },
+
+    {
       title: "OEE",
       dataIndex: "OEE",
       align: "center",
@@ -112,12 +118,19 @@ const productOeeComponent = ({ productOee, dispatch }) => {
           return (
             <Tag color={color}>
               {" "}
-              {parseFloat((record.OEE * 100).toFixed(1)) + "%"}
+              {record.OEE === "NaN" || record.OEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
             </Tag>
           );
         } else {
           return (
-            <span> {parseFloat((record.OEE * 100).toFixed(1)) + "%"}</span>
+            <span>
+              {" "}
+              {record.OEE === "NaN" || record.OEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
+            </span>
           );
         }
       },
@@ -135,12 +148,19 @@ const productOeeComponent = ({ productOee, dispatch }) => {
           return (
             <Tag color={color}>
               {" "}
-              {parseFloat((record.NEE * 100).toFixed(1)) + "%"}
+              {record.NEE === "NaN" || record.NEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
             </Tag>
           );
         } else {
           return (
-            <span> {parseFloat((record.NEE * 100).toFixed(1)) + "%"}</span>
+            <span>
+              {" "}
+              {record.NEE === "NaN" || record.NEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
+            </span>
           );
         }
       },
@@ -158,12 +178,19 @@ const productOeeComponent = ({ productOee, dispatch }) => {
           return (
             <Tag color={color}>
               {" "}
-              {parseFloat((record.SUR * 100).toFixed(1)) + "%"}
+              {record.SUR === "NaN" || record.SUR === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
             </Tag>
           );
         } else {
           return (
-            <span> {parseFloat((record.SUR * 100).toFixed(1)) + "%"}</span>
+            <span>
+              {" "}
+              {record.SUR === "NaN" || record.SUR === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
+            </span>
           );
         }
       },
@@ -353,7 +380,7 @@ const productOeeComponent = ({ productOee, dispatch }) => {
             newList.push({ key: key, label: value.text });
           }
           return (
-            <Select   showSearch optionFilterProp="children">
+            <Select showSearch optionFilterProp="children">
               {newList.map(function (item, index) {
                 return (
                   <Select.Option key={index} value={item.key}>
@@ -452,6 +479,15 @@ const productOeeComponent = ({ productOee, dispatch }) => {
     },
 
     {
+      title: "SPT",
+      dataIndex: "SPT",
+      valueType: "text",
+      align: "center",
+      width: 120,
+      hideInSearch: true,
+    },
+
+    {
       title: "OEE",
       dataIndex: "OEE",
       valueType: "text",
@@ -464,12 +500,19 @@ const productOeeComponent = ({ productOee, dispatch }) => {
         if (parseInt(record.OEE * 100) < record.targetke) {
           return (
             <Tag color={color}>
-              {parseFloat((record.OEE * 100).toFixed(1)) + "%"}
+              {record.OEE === "NaN" || record.OEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
             </Tag>
           );
         } else {
           return (
-            <span> {parseFloat((record.OEE * 100).toFixed(1)) + "%"}</span>
+            <span>
+              {" "}
+              {record.OEE === "NaN" || record.OEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
+            </span>
           );
         }
       },
@@ -488,12 +531,19 @@ const productOeeComponent = ({ productOee, dispatch }) => {
         if (parseInt(record.NEE * 100) < record.targetke) {
           return (
             <Tag color={color}>
-              {parseFloat((record.NEE * 100).toFixed(1)) + "%"}
+              {record.NEE === "NaN" || record.NEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
             </Tag>
           );
         } else {
           return (
-            <span> {parseFloat((record.NEE * 100).toFixed(1)) + "%"}</span>
+            <span>
+              {" "}
+              {record.NEE === "NaN" || record.NEE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
+            </span>
           );
         }
       },
@@ -512,12 +562,19 @@ const productOeeComponent = ({ productOee, dispatch }) => {
         if (parseInt(record.SUR * 100) < record.targetke) {
           return (
             <Tag color={color}>
-              {parseFloat((record.SUR * 100).toFixed(1)) + "%"}
+              {record.SUR === "NaN" || record.SUR === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
             </Tag>
           );
         } else {
           return (
-            <span> {parseFloat((record.SUR * 100).toFixed(1)) + "%"}</span>
+            <span>
+              {" "}
+              {record.SUR === "NaN" || record.SUR === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
+            </span>
           );
         }
       },
@@ -842,6 +899,7 @@ const productOeeComponent = ({ productOee, dispatch }) => {
           dt: dataList[i].dt,
           ot: dataList[i].ot,
           ts: dataList[i].ts,
+          SPT: dataList[i].SPT,
           OEE: parseInt(dataList[i].OEE * 100) + "%",
           NEE: parseInt(dataList[i].NEE * 100) + "%",
           SUR: parseInt(dataList[i].SUR * 100) + "%",
@@ -879,6 +937,7 @@ const productOeeComponent = ({ productOee, dispatch }) => {
           "dt",
           "ot",
           "ts",
+          "SPT",
           "OEE",
           "NEE",
           "SUR",
@@ -908,6 +967,7 @@ const productOeeComponent = ({ productOee, dispatch }) => {
           "DT",
           "OT",
           "TS",
+          "SPT",
           "OEE",
           "NEE",
           "SUR",

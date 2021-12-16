@@ -231,42 +231,44 @@ const supportTimeComponent = ({
     },
 
 
-    {
-      title: 'prodt4',
-      dataIndex: 'prodt4',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      width: 100,
-      initialValue: IsUpdate ? UpdateDate.prodt4 : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'prodt4不能为空!',
-          },
-        ],
-      },
-    },
+    // {
+    //   title: 'prodt4',
+    //   dataIndex: 'prodt4',
+    //   valueType: 'text',
+    //   align: 'center',
+    //   hideInSearch: true,
+    //   hideInForm:true,
+    //   width: 100,
+    //   initialValue: IsUpdate ? UpdateDate.prodt4 : '',
+    //   formItemProps: {
+    //     rules: [
+    //       {
+    //         required: true,
+    //         message: 'prodt4不能为空!',
+    //       },
+    //     ],
+    //   },
+    // },
 
 
-    {
-      title: '产品族id',
-      dataIndex: 'areaid',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      width: 100,
-      initialValue: IsUpdate ? UpdateDate.areaid : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '产品族id不能为空!',
-          },
-        ],
-      },
-    },
+    // {
+    //   title: '产品族id',
+    //   dataIndex: 'areaid',
+    //   valueType: 'text',
+    //   align: 'center',
+    //   hideInSearch: true,
+    //   hideInForm:true,
+    //   width: 100,
+    //   initialValue: IsUpdate ? UpdateDate.areaid : '',
+    //   formItemProps: {
+    //     rules: [
+    //       {
+    //         required: true,
+    //         message: '产品族id不能为空!',
+    //       },
+    //     ],
+    //   },
+    // },
 
 
     {
@@ -505,8 +507,8 @@ const supportTimeComponent = ({
         't4':dataList[i].t4,
         't5':dataList[i].t5,
         'paidhour':dataList[i].paidhour,
-        'prodt4':dataList[i].prodt4,
-        'areaid':dataList[i].areaid,
+        // 'prodt4':dataList[i].prodt4,
+        // 'areaid':dataList[i].areaid,
         'ke':(dataList[i].ke * 100) + '%',
         'ts':dataList[i].ts,
         'gap':dataList[i].gap
@@ -519,9 +521,9 @@ const supportTimeComponent = ({
     {
       sheetData: dataTable,
       sheetName: 'sheet',
-      sheetFilter: ['departmentshortname', 'tsdate','t1','t4','t5','paidhour', 'prodt4','areaid',
+      sheetFilter: ['departmentshortname', 'tsdate','t1','t4','t5','paidhour',  
       'ke', 'ts','gap'],
-      sheetHeader: ['部门名称', '日期', 'T1','T4','T5','paidhour', 'prodt4','产品族id','效率','TS','Gap'],
+      sheetHeader: ['部门名称', '日期', 'T1','T4','T5','paidhour', '效率','TS','Gap'],
     }
   ];
   var toExcel = new ExportJsonExcel(option);

@@ -44,6 +44,11 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
   const actionRef = useRef();
   const [selectedRowsState, setSelectedRows] = useState([]);
   // const [areaList, setareaList] = useState([]);
+  const [newSum, setNewSum] = useState(0);
+  const [newDisf, setNewDisf] = useState(0);
+  const [newEff, setNewEff] = useState(0);
+ 
+
 
   /**
    * 编辑初始化
@@ -93,6 +98,7 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
         ],
       },
     },
+
 
     {
       title: "日期",
@@ -170,39 +176,39 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
       },
     },
 
-    {
-      title: "ts",
-      dataIndex: "ts",
-      valueType: "text",
-      align: "center",
-      hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.ts : "",
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: "ts不能为空!",
-          },
-        ],
-      },
-    },
+    // {
+    //   title: "ts",
+    //   dataIndex: "ts",
+    //   valueType: "text",
+    //   align: "center",
+    //   hideInSearch: true,
+    //   initialValue: IsUpdate ? UpdateDate.ts : "",
+    //   formItemProps: {
+    //     rules: [
+    //       {
+    //         required: true,
+    //         message: "ts不能为空!",
+    //       },
+    //     ],
+    //   },
+    // },
 
-    {
-      title: "gap",
-      dataIndex: "gap",
-      valueType: "text",
-      align: "center",
-      hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.gap : "",
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: "gap不能为空!",
-          },
-        ],
-      },
-    },
+    // {
+    //   title: "gap",
+    //   dataIndex: "gap",
+    //   valueType: "text",
+    //   align: "center",
+    //   hideInSearch: true,
+    //   initialValue: IsUpdate ? UpdateDate.gap : "",
+    //   formItemProps: {
+    //     rules: [
+    //       {
+    //         required: true,
+    //         message: "gap不能为空!",
+    //       },
+    //     ],
+    //   },
+    // },
 
     {
       title: "paidhour",
@@ -272,22 +278,83 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
       },
     },
 
+
     {
-      title: "ke",
-      dataIndex: "ke",
-      valueType: "text",
-      align: "center",
+      title: 'KE',
+      dataIndex: 'ke',
+      valueType: 'text',
+      align: 'center',
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.ke : "",
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: "ke不能为空!",
-          },
-        ],
+      width: 100,
+      initialValue: IsUpdate ? UpdateDate.ke : '',
+      renderFormItem: (_, { type, defaultRender, formItemProps, fieldProps, ...rest }, form) => {
+        let eff = 0;
+        eff = Number(form.getFieldsValue(true).t4) / (Number(form.getFieldsValue(true).t4) + Number(form.getFieldsValue(true).t1))
+        console.log('Number(form.getFieldsValue(true).t4)', Number(form.getFieldsValue(true).t4))
+        setNewEff(eff)
+        if (IsUpdate) {
+          // 返回新的组件
+          return <Input disabled value={eff} ></Input>
+        } else {
+          return <Input disabled value={eff}></Input>
+        }
+        return defaultRender(_);
+      },
+      render: (text) => {
+        return parseInt(text * 100) + '%';
+      }
+    },
+
+
+
+    {
+      title: 'TS',
+      dataIndex: 'ts',
+      valueType: 'text',
+      width: 100,
+      align: 'center',
+      hideInSearch: true,
+      initialValue: IsUpdate ? UpdateDate.ts : '',
+      renderFormItem: (_, { type, defaultRender, formItemProps, fieldProps, ...rest }, form) => {
+        let sum = 0;
+        sum = Number(form.getFieldsValue(true).t1) + Number(form.getFieldsValue(true).t4) + Number(form.getFieldsValue(true).t5)
+        setNewSum(sum)
+        if (IsUpdate) {
+          // 返回新的组件
+          return <Input disabled value={sum}></Input>
+        } else {
+          return <Input disabled value={sum}></Input>
+        }
+        return defaultRender(_);
       },
     },
+
+
+
+
+    {
+      title: 'Gap',
+      dataIndex: 'gap',
+      valueType: 'text',
+      hideInSearch: true,
+      align: 'center',
+      width: 100,
+      initialValue: IsUpdate ? UpdateDate.gap : '',
+      renderFormItem: (_, { type, defaultRender, formItemProps, fieldProps, ...rest }, form) => {
+        // console.log("renderFormItem", _, type, defaultRender, formItemProps, fieldProps, rest, form.getFieldsValue(true))
+        let disf = 0;
+        disf = Number(form.getFieldsValue(true).paidhour) - Number(form.getFieldsValue(true).t1) - Number(form.getFieldsValue(true).t4) - Number(form.getFieldsValue(true).t5);
+        setNewDisf(disf)
+        if (IsUpdate) {
+          // 返回新的组件
+          return <Input disabled value={disf}></Input>
+        } else {
+          return <Input disabled value={disf}></Input>
+        }
+        return defaultRender(_);
+      },
+    },
+     
 
     {
       title: "操作",
@@ -342,13 +409,13 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
         Number(fields.departmentid) == null ? "" : Number(fields.departmentid),
       tsdate: fields.tsdate,
       areaid: Number(fields.areaid) == null ? "" : Number(fields.areaid),
-      ts: fields.ts,
-      gap: fields.gap,
       paidhour: fields.paidhour,
       t1: fields.t1,
       t4: fields.t4,
       t5: fields.t5,
-      ke: fields.ke,
+      ts: newSum,
+      gap: newDisf,
+      ke: newEff,
       period: fields.period,
     };
     try {
@@ -380,13 +447,13 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
         departmentid: Number(fields.departmentid),
         tsdate: fields.tsdate,
         areaid: Number(fields.areaid),
-        ts: fields.ts,
-        gap: fields.gap,
         paidhour: fields.paidhour,
         t1: fields.t1,
         t4: fields.t4,
         t5: fields.t5,
-        ke: fields.ke,
+        ts: newSum,
+        gap: newDisf,
+        ke: newEff,
       });
       if (data.status == "200") {
         hide();
@@ -441,13 +508,13 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
           departmentshortname: dataList[i].departmentshortname,
           tsdate: dataList[i].tsdate,
           areaname: dataList[i].areaname,
-          ts: dataList[i].ts,
-          gap: dataList[i].gap,
           paidhour: dataList[i].paidhour,
           t1: dataList[i].t1,
           t4: dataList[i].t4,
           t5: dataList[i].t5,
-          ke: dataList[i].ke,
+          ke: (dataList[i].ke *100) + "%",
+          ts: dataList[i].ts,
+          gap: dataList[i].gap,
         };
         dataTable.push(obj);
       }
@@ -461,25 +528,25 @@ const supportInputComponent = ({ supportTarea, dispatch }) => {
           "departmentshortname",
           "tsdate",
           "areaname",
-          "ts",
-          "gap",
           "paidhour",
           "t1",
           "t4",
           "t5",
           "ke",
+          "ts",
+          "gap",
         ],
         sheetHeader: [
           "部门",
           "日期",
           "区域",
-          "ts",
-          "gap",
           "paidhour",
           "t1",
           "t4",
           "t5",
           "ke",
+          "ts",
+          "gap",
         ],
       },
     ];

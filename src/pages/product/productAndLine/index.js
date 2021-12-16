@@ -48,7 +48,7 @@ const numberComponent = ({
       dataIndex: 'productid',
       valueType: 'text',
       align: 'center',
-      hideInTable:true,
+      // hideInTable:true,
       width:150,
       valueEnum: ProductTypeList.length == 0 ? {} : ProductTypeList,
       initialValue: !IsUpdate ? '' : (UpdateDate.productid ? UpdateDate.productid.toString() : ''),
@@ -82,16 +82,6 @@ const numberComponent = ({
           },
         ],
       },
-    },
-
-    {
-      title: '产品名称',
-      dataIndex: 'productname',
-      valueType: 'text',
-      align: 'center',
-      width:150,
-      hideInSearch:true,
-      hideInForm:true,
     },
 
 
@@ -528,7 +518,7 @@ const numberComponent = ({
     if (dataList.length > 0) {
       for (let i in dataList) {
         let obj = {
-          'productname': dataList[i].productname,
+          'productid': dataList[i].productid,
           'linename': dataList[i].linename,
           'ut': dataList[i].ut,
           'dt': dataList[i].dt,
@@ -552,7 +542,7 @@ const numberComponent = ({
       {
         sheetData: dataTable,
         sheetName: 'sheet',
-        sheetFilter: ['productname','linename','ut', 'dt','TargetKE','TargetIE','TargetSUR','TargetOEE','Preference','TargetFPY',
+        sheetFilter: ['productid','linename','ut', 'dt','TargetKE','TargetIE','TargetSUR','TargetOEE','Preference','TargetFPY',
         'TargetMDR','TargetAvailability','TargetQuality','TargetPerformance','remark'],
         sheetHeader: ['产品名称','线体名称','ut', 'dt',  '目标KE',  '目标IE',  '目标SUR',  
         '目标OEE',  '最高效率',  '目标FPY',  '目标MDR',  '目标效率',  '目标质量','目标最高效率','备注'],
