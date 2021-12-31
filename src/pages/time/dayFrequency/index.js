@@ -185,7 +185,7 @@ const dayFrequencyComponent = ({
 
 
     {
-      title: '产品族',
+      title: '区域',
       dataIndex: 'areaid',
       valueType: 'text',
       align: 'center',
@@ -218,7 +218,7 @@ const dayFrequencyComponent = ({
         rules: [
           {
             required: true,
-            message: '产品族不能为空!',
+            message: '区域不能为空!',
           },
         ],
       },
@@ -753,7 +753,7 @@ const dayFrequencyComponent = ({
         sheetName: 'sheet',
         sheetFilter: ['tsdate', 'shiftname', 'employeename', 'hour', 'period', 'gap', 'productarea', 'relax',
           'lend', 'borrow', 't4', 't5', 'linename', 'relaxtype', 'lendarea'],
-        sheetHeader: ['日期', '班次', '员工', '排班', '工时', 'GAP', '产品族', '休假时间', '借出', '借入',
+        sheetHeader: ['日期', '班次', '员工', '排班', '工时', 'GAP', '区域', '休假时间', '借出', '借入',
           'T4', 'T5', '线体', '休假选项', '借出区域'],
       }
     ];

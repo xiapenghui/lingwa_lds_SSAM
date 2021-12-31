@@ -76,7 +76,7 @@ const regionComponent = ({
     },
 
     {
-      title: '产品族名称',
+      title: '区域名称',
       dataIndex: 'productarea',
       valueType: 'text',
       align: 'center',
@@ -85,7 +85,7 @@ const regionComponent = ({
         rules: [
           {
             required: true,
-            message: '产品族名称不能为空!',
+            message: '区域名称不能为空!',
           },
         ],
       },
@@ -250,7 +250,7 @@ const regionComponent = ({
         sheetData: dataTable,
         sheetName: 'sheet',
         sheetFilter: ['familyname', 'productarea', 'remark'],
-        sheetHeader: ['工厂名称', '产品族名称', '备注'],
+        sheetHeader: ['工厂名称', '区域名称', '备注'],
       }
     ];
 

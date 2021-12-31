@@ -205,7 +205,7 @@ const timeT0T3Component = ({
     },
 
     {
-      title: '产品族',
+      title: '区域',
       dataIndex: 'productareaid',
       valueType: 'text',
       align: 'center',
@@ -419,7 +419,7 @@ const timeT0T3Component = ({
         sheetName: 'sheet',
         sheetFilter: ['linename', 'date', 'shift', 'type','downtime', 'downtimedec', 'familyname',
           'usetime' ],
-        sheetHeader: ['线体', '日期', '班次', '红色类型', '红色项', '红色描述', '产品族', '用时'],
+        sheetHeader: ['线体', '日期', '班次', '红色类型', '红色项', '红色描述', '区域', '用时'],
       }
     ];
 

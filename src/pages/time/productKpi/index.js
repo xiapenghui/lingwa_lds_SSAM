@@ -119,7 +119,7 @@ const productKpiComponent = ({
 
 
     {
-      title: '产品族',
+      title: '区域',
       dataIndex: 'areaid',
       valueType: 'text',
       align: 'center',
@@ -152,7 +152,7 @@ const productKpiComponent = ({
         rules: [
           {
             required: true,
-            message: '产品族不能为空!',
+            message: '区域不能为空!',
           },
         ],
       },
@@ -590,14 +590,14 @@ const productKpiComponent = ({
       dataTable.push(obj);
     }
   }
-  option.fileName = '产品族kpi管理'
+  option.fileName = '区域kpi管理'
   option.datas = [
     {
       sheetData: dataTable,
       sheetName: 'sheet',
       sheetFilter: ['tsdate', 'shiftname', 'productarea','ot','ut','dt','goodparts','ts','t0','t1','t2','t3',
       't4','t5','targetparts','targetke','targetie','targetprr','lend','borrow','relax'],
-      sheetHeader: ['日期', '班次', '产品族', 'ou','ut','dt','产量','ts','t0','t1','t2','t3','t4','t5',
+      sheetHeader: ['日期', '班次', '区域', 'ou','ut','dt','产量','ts','t0','t1','t2','t3','t4','t5',
       '目标产量','目标ke','目标ie','目标prr','借出','借入','休假'],
     }
   ];

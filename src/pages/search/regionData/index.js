@@ -63,7 +63,7 @@ const regionDataComponent = ({ regionData, dispatch }) => {
     },
 
     {
-      title: "产品族",
+      title: "区域",
       dataIndex: "productarea",
       align: "center",
       width: 100,
@@ -357,7 +357,7 @@ const regionDataComponent = ({ regionData, dispatch }) => {
     },
 
     {
-      title: "产品族",
+      title: "区域",
       dataIndex: "productareaid",
       valueType: "text",
       align: "center",
@@ -836,7 +836,7 @@ const regionDataComponent = ({ regionData, dispatch }) => {
         dataTable.push(obj);
       }
     }
-    option.fileName = "产品族查询";
+    option.fileName = "区域查询";
     option.datas = [
       {
         sheetData: dataTable,
@@ -872,7 +872,7 @@ const regionDataComponent = ({ regionData, dispatch }) => {
         ],
         sheetHeader: [
           "班次",
-          "产品族",
+          "区域",
           "日期",
           "UT",
           "DT",

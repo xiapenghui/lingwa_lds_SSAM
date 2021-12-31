@@ -71,6 +71,9 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       fixed: "left",
     },
 
+
+
+
     {
       title: "OT",
       dataIndex: "ot",
@@ -403,6 +406,40 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       hideInSearch: true,
     },
 
+ 
+    {
+      title: "日期",
+      dataIndex: "tsdate",
+      valueType: "date",
+      align: "center",
+      width: 100,
+      hideInSearch: true,
+    },
+
+
+    {
+      title: "目标OEE",
+      dataIndex: "targetoee",
+      align: "center",
+      width: 100,
+      hideInSearch: true,
+      render: (text) => {
+        return text + "%";
+      },
+    },
+
+    {
+      title: "目标SUR",
+      dataIndex: "targetsur",
+      align: "center",
+      width: 100,
+      hideInSearch: true,
+      render: (text) => {
+        return text + "%";
+      },
+    },
+
+
     {
       title: "OT",
       dataIndex: "ot",
@@ -412,7 +449,7 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
     },
 
     {
-      title: "ut",
+      title: "UT",
       dataIndex: "ut",
       align: "center",
       width: 100,
@@ -420,7 +457,7 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
     },
 
     {
-      title: "dt",
+      title: "DT",
       dataIndex: "dt",
       align: "center",
       width: 100,
@@ -428,14 +465,23 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
     },
 
     {
-      title: "日期",
-      dataIndex: "tsdate",
-      valueType: "dateTime",
+      title: "SPT",
+      dataIndex: "SPT",
       align: "center",
       width: 100,
       hideInSearch: true,
     },
 
+
+    {
+      title: "TS",
+      dataIndex: "ts",
+      align: "center",
+      width: 100,
+      hideInSearch: true,
+    },
+
+   
     {
       title: "OEE",
       dataIndex: "OEE",
@@ -530,44 +576,6 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
     },
 
     {
-      title: "目标OEE",
-      dataIndex: "targetoee",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-      render: (text) => {
-        return text + "%";
-      },
-    },
-
-    {
-      title: "目标SUR",
-      dataIndex: "targetsur",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-      render: (text) => {
-        return text + "%";
-      },
-    },
-
-    {
-      title: "ts",
-      dataIndex: "ts",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
-
-    {
-      title: "SPT",
-      dataIndex: "SPT",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
-
-    {
       title: "产量",
       dataIndex: "goodparts",
       align: "center",
@@ -583,69 +591,69 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       hideInSearch: true,
     },
 
-    {
-      title: "t0",
-      dataIndex: "t0",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-      render: (text) => {
-        let color = text < 0 || text != 0 ? "red" : "green";
-        if (text < 0 || text != 0) {
-          return <Tag color={color}>{text}</Tag>;
-        } else {
-          return <span> {text}</span>;
-        }
-      },
-    },
+    // {
+    //   title: "t0",
+    //   dataIndex: "t0",
+    //   align: "center",
+    //   width: 100,
+    //   hideInSearch: true,
+    //   render: (text) => {
+    //     let color = text < 0 || text != 0 ? "red" : "green";
+    //     if (text < 0 || text != 0) {
+    //       return <Tag color={color}>{text}</Tag>;
+    //     } else {
+    //       return <span> {text}</span>;
+    //     }
+    //   },
+    // },
 
-    {
-      title: "t1",
-      dataIndex: "t1",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
+    // {
+    //   title: "t1",
+    //   dataIndex: "t1",
+    //   align: "center",
+    //   width: 100,
+    //   hideInSearch: true,
+    // },
 
-    {
-      title: "t2",
-      dataIndex: "t2",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
+    // {
+    //   title: "t2",
+    //   dataIndex: "t2",
+    //   align: "center",
+    //   width: 100,
+    //   hideInSearch: true,
+    // },
 
-    {
-      title: "t3",
-      dataIndex: "t3",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
+    // {
+    //   title: "t3",
+    //   dataIndex: "t3",
+    //   align: "center",
+    //   width: 100,
+    //   hideInSearch: true,
+    // },
 
-    {
-      title: "t4",
-      dataIndex: "t4",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
+    // {
+    //   title: "t4",
+    //   dataIndex: "t4",
+    //   align: "center",
+    //   width: 100,
+    //   hideInSearch: true,
+    // },
 
-    {
-      title: "t5",
-      dataIndex: "t5",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
+    // {
+    //   title: "t5",
+    //   dataIndex: "t5",
+    //   align: "center",
+    //   width: 100,
+    //   hideInSearch: true,
+    // },
 
-    {
-      title: "ke",
-      dataIndex: "ke",
-      align: "center",
-      width: 100,
-      hideInSearch: true,
-    },
+    // {
+    //   title: "ke",
+    //   dataIndex: "ke",
+    //   align: "center",
+    //   width: 100,
+    //   hideInSearch: true,
+    // },
 
     // {
     //   title: '目标PRR',
@@ -795,13 +803,13 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
           SPT: dataList[i].SPT,
           goodparts: dataList[i].goodparts,
           targetparts: dataList[i].targetparts,
-          t0: dataList[i].t0,
-          t1: dataList[i].t1,
-          t2: dataList[i].t2,
-          t3: dataList[i].t3,
-          t4: dataList[i].t4,
-          t5: dataList[i].t5,
-          ke: parseInt(dataList[i].ke * 100) + "%",
+          // t0: dataList[i].t0,
+          // t1: dataList[i].t1,
+          // t2: dataList[i].t2,
+          // t3: dataList[i].t3,
+          // t4: dataList[i].t4,
+          // t5: dataList[i].t5,
+          // ke: parseInt(dataList[i].ke * 100) + "%",
         };
         dataTable.push(obj);
       }
@@ -826,36 +834,36 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
           "SPT",
           "goodparts",
           "targetparts",
-          "t0",
-          "t1",
-          "t2",
-          "t3",
-          "t4",
-          "t5",
-          "ke",
+          // "t0",
+          // "t1",
+          // "t2",
+          // "t3",
+          // "t4",
+          // "t5",
+          // "ke",
         ],
         sheetHeader: [
           "班次",
           "线体",
-          "ut",
-          "dt",
+          "UT",
+          "DT",
           "OT",
           "OEE",
           "NEE",
           "SUR",
           "目标OEE",
           "目标SUR",
-          "ts",
+          "TS",
           "SPT",
           "产量",
           "目标产量",
-          "t0",
-          "t1",
-          "t2",
-          "t3",
-          "t4",
-          "t5",
-          "ke",
+          // "t0",
+          // "t1",
+          // "t2",
+          // "t3",
+          // "t4",
+          // "t5",
+          // "ke",
         ],
       },
     ];

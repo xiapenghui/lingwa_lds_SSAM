@@ -116,7 +116,7 @@ const unscheduledComponent = ({
 
     
     {
-      title: '产品族',
+      title: '区域',
       dataIndex: 'productareaid',
       valueType: 'text',
       align: 'center',
@@ -363,7 +363,7 @@ const unscheduledComponent = ({
         sheetData: dataTable,
         sheetName: 'sheet',
         sheetFilter: ['employeeno', 'employeename', 'productarea','linename','TimeLogin', 'TimeLogout','period'],
-        sheetHeader: ['员工编号', '员工名称', '产品族', '线体','登陆时间','登出时间','工时'],
+        sheetHeader: ['员工编号', '员工名称', '区域', '线体','登陆时间','登出时间','工时'],
       }
     ];
     var toExcel = new ExportJsonExcel(option);

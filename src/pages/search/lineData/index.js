@@ -146,7 +146,7 @@ const lineDataComponent = ({
 
 
     {
-      title: '产品族',
+      title: '区域',
       dataIndex: 'productareaid',
       valueType: 'text',
       align: 'center',

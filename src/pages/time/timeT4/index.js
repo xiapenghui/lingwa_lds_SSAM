@@ -181,128 +181,128 @@ const timeT4Component = ({
 
 
 
-    {
-      title: '时间段',
-      dataIndex: 'timeaxisid',
-      valueType: 'text',
-      align: 'center',
-      width: 150,
-      hideInSearch: true,
-      valueEnum: timeaxisList.length == 0 ? {} : timeaxisList,
-      initialValue: !IsUpdate ? '' : (UpdateDate.timeaxisid ? UpdateDate.timeaxisid.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(timeaxisList)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '时间段不能为空!',
-          },
-        ],
-      },
-    },
+    // {
+    //   title: '时间段',
+    //   dataIndex: 'timeaxisid',
+    //   valueType: 'text',
+    //   align: 'center',
+    //   width: 150,
+    //   hideInSearch: true,
+    //   valueEnum: timeaxisList.length == 0 ? {} : timeaxisList,
+    //   initialValue: !IsUpdate ? '' : (UpdateDate.timeaxisid ? UpdateDate.timeaxisid.toString() : ''),
+    //   renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
+    //     if (type === 'form' || type === 'table') {
+    //       // 返回新的组件
+    //       let newList = []
+    //       for (let [key, value] of Object.entries(timeaxisList)) {
+    //         newList.push({ key: key, label: value.text })
+    //       }
+    //       return <Select
+    //         allowClear
+    //         showSearch
+    //         optionFilterProp='children'
+    //       >
+    //         {newList.map(function (item, index) {
+    //           return <Select.Option key={index} value={item.key}>
+    //             {item.label}
+    //           </Select.Option>
+    //         })}
+    //       </Select>
+    //     }
+    //     return defaultRender(_);
+    //   },
+    //   formItemProps: {
+    //     rules: [
+    //       {
+    //         required: true,
+    //         message: '时间段不能为空!',
+    //       },
+    //     ],
+    //   },
+    // },
 
 
-    {
-      title: '部门',
-      dataIndex: 'departmentid',
-      valueType: 'text',
-      align: 'center',
-      width: 150,
-      hideInSearch: true,
-      valueEnum: departmentList.length == 0 ? {} : departmentList,
-      initialValue: !IsUpdate ? '' : (UpdateDate.departmentid ? UpdateDate.departmentid.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(departmentList)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '部门不能为空!',
-          },
-        ],
-      },
-    },
+    // {
+    //   title: '部门',
+    //   dataIndex: 'departmentid',
+    //   valueType: 'text',
+    //   align: 'center',
+    //   width: 150,
+    //   hideInSearch: true,
+    //   valueEnum: departmentList.length == 0 ? {} : departmentList,
+    //   initialValue: !IsUpdate ? '' : (UpdateDate.departmentid ? UpdateDate.departmentid.toString() : ''),
+    //   renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
+    //     if (type === 'form' || type === 'table') {
+    //       // 返回新的组件
+    //       let newList = []
+    //       for (let [key, value] of Object.entries(departmentList)) {
+    //         newList.push({ key: key, label: value.text })
+    //       }
+    //       return <Select
+    //         allowClear
+    //         showSearch
+    //         optionFilterProp='children'
+    //       >
+    //         {newList.map(function (item, index) {
+    //           return <Select.Option key={index} value={item.key}>
+    //             {item.label}
+    //           </Select.Option>
+    //         })}
+    //       </Select>
+    //     }
+    //     return defaultRender(_);
+    //   },
+    //   formItemProps: {
+    //     rules: [
+    //       {
+    //         required: true,
+    //         message: '部门不能为空!',
+    //       },
+    //     ],
+    //   },
+    // },
 
 
-    {
-      title: '员工',
-      dataIndex: 'employeeid',
-      valueType: 'text',
-      align: 'center',
-      width: 150,
-      hideInSearch: true,
-      valueEnum: personList.length == 0 ? {} : personList,
-      initialValue: !IsUpdate ? '' : (UpdateDate.employeeid ? UpdateDate.employeeid.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(personList)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
+    // {
+    //   title: '员工',
+    //   dataIndex: 'employeeid',
+    //   valueType: 'text',
+    //   align: 'center',
+    //   width: 150,
+    //   hideInSearch: true,
+    //   valueEnum: personList.length == 0 ? {} : personList,
+    //   initialValue: !IsUpdate ? '' : (UpdateDate.employeeid ? UpdateDate.employeeid.toString() : ''),
+    //   renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
+    //     if (type === 'form' || type === 'table') {
+    //       // 返回新的组件
+    //       let newList = []
+    //       for (let [key, value] of Object.entries(personList)) {
+    //         newList.push({ key: key, label: value.text })
+    //       }
+    //       return <Select
+    //         allowClear
+    //         showSearch
+    //         optionFilterProp='children'
+    //       >
+    //         {newList.map(function (item, index) {
+    //           return <Select.Option key={index} value={item.key}>
+    //             {item.label}
+    //           </Select.Option>
+    //         })}
+    //       </Select>
+    //     }
+    //     return defaultRender(_);
+    //   },
 
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '员工不能为空!',
-          },
-        ],
-      },
-    },
+    //   formItemProps: {
+    //     rules: [
+    //       {
+    //         required: true,
+    //         message: '员工不能为空!',
+    //       },
+    //     ],
+    //   },
+    // },
 
     {
       title: '班次',
@@ -391,7 +391,7 @@ const timeT4Component = ({
     },
 
     {
-      title: '产品族',
+      title: '区域',
       dataIndex: 'productareaid',
       valueType: 'text',
       align: 'center',
@@ -426,7 +426,7 @@ const timeT4Component = ({
         rules: [
           {
             required: true,
-            message: '产品族不能为空!',
+            message: '区域不能为空!',
           },
         ],
       },
@@ -580,12 +580,15 @@ const timeT4Component = ({
   const handleAdd = async (fields) => {
     const hide = message.loading('正在添加');
     let params = {
-      departmentid: Number(fields.departmentid) == null ? '' : Number(fields.departmentid),
-      employeeid: Number(fields.employeeid) == null ? '' : Number(fields.employeeid),
+      // departmentid: Number(fields.departmentid) == null ? '' : Number(fields.departmentid),
+      // employeeid: Number(fields.employeeid) == null ? '' : Number(fields.employeeid),
+
+      departmentid: 3,
+      employeeid: 753,
+      timeaxisid: 1,
       shiftid: Number(fields.shiftid) == null ? '' : Number(fields.shiftid),
       lineid: Number(fields.lineid) == null ? '' : Number(fields.lineid),
       supporttimeid: Number(fields.supporttimeid) == null ? '' : Number(fields.supporttimeid),
-      timeaxisid: Number(fields.timeaxisid) == null ? '' : Number(fields.timeaxisid),
       usetime: fields.usetime,
       date: fields.date,
       timefrom: fields.timefrom,
@@ -619,12 +622,12 @@ const timeT4Component = ({
     try {
       let data = await updatePut({
         id: UpdateDate.id,
-        departmentid: Number(fields.departmentid),
-        employeeid: Number(fields.employeeid),
+        departmentid: 3,
+        employeeid: 753,
+        timeaxisid: 1,
         shiftid: Number(fields.shiftid),
         lineid: Number(fields.lineid),
         supporttimeid: Number(fields.supporttimeid),
-        timeaxisid: Number(fields.timeaxisid),
         date: fields.date,
         timefrom: fields.timefrom,
         timeto: fields.timeto,
@@ -688,9 +691,9 @@ const timeT4Component = ({
           'type': dataList[i].type,
           'downtime': dataList[i].downtime,
           'date':dataList[i].date,
-          'timeaxis':dataList[i].timeaxis,
-          'departmentshortname':dataList[i].departmentshortname,
-          'employeename':dataList[i].employeename,
+          // 'timeaxis':dataList[i].timeaxis,
+          // 'departmentshortname':dataList[i].departmentshortname,
+          // 'employeename':dataList[i].employeename,
           'shift':dataList[i].shift,
           'familyname':dataList[i].familyname,
           'productarea':dataList[i].productarea,
@@ -706,9 +709,9 @@ const timeT4Component = ({
       {
         sheetData: dataTable,
         sheetName: 'sheet',
-        sheetFilter: ['type', 'downtime', 'date','timeaxis','departmentshortname','employeename','shift','familyname',
+        sheetFilter: ['type', 'downtime', 'date','shift','familyname',
       'productarea','linename','usetime','remark'],
-        sheetHeader: ['红色类型', '红色项', '日期', '时间段','部门','员工','班次','工厂名称','产品族','线体','用时','备注'],
+        sheetHeader: ['红色类型', '红色项', '日期','班次','工厂名称','区域','线体','用时','备注'],
       }
     ];
     var toExcel = new ExportJsonExcel(option);

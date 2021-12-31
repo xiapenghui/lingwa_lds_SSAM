@@ -66,7 +66,7 @@ const lineComponent = ({ line, dispatch }) => {
     },
 
     {
-      title: "所属产品族",
+      title: "所属区域",
       dataIndex: "productareaid",
       valueType: "text",
       align: "center",
@@ -101,7 +101,7 @@ const lineComponent = ({ line, dispatch }) => {
         rules: [
           {
             required: true,
-            message: "所属产品族不能为空!",
+            message: "所属区域不能为空!",
           },
         ],
       },

@@ -252,7 +252,7 @@ const supportTimeComponent = ({
 
 
     // {
-    //   title: '产品族id',
+    //   title: '区域id',
     //   dataIndex: 'areaid',
     //   valueType: 'text',
     //   align: 'center',
@@ -264,7 +264,7 @@ const supportTimeComponent = ({
     //     rules: [
     //       {
     //         required: true,
-    //         message: '产品族id不能为空!',
+    //         message: '区域id不能为空!',
     //       },
     //     ],
     //   },
