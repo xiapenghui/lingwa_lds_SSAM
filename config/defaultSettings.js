@@ -37,10 +37,8 @@ const proSettings = {
     yshyerp_oilwater: 8080,
     yshyerp_location: 8081,
     yshyerp_invoice: 8082,
-    //23113是ssam
     sspalds_role: 8073,
     // yshyerp_sspa: 9100,
-    //23113是ssam
     yshyerp_sspa: 23113
   },
 

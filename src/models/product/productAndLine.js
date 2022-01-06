@@ -19,7 +19,6 @@ const Model = {
   namespace: TableName,
   state: {
     TableList: [],
-    
     isNoList: {},
     lineList: {},
     ProductTypeList: {},

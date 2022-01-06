@@ -34,6 +34,7 @@ export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/lineData';
 export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/lineOee';
 export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/personnelNum';
 export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/productData';
+export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/productKe';
 export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/productOee';
 export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/redOption';
 export * from 'D:/XIA/newest/lingwa_lds_SSAM/src/models/search/regionData';

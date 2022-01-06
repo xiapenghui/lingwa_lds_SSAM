@@ -11,7 +11,6 @@ const ImportExcel = (props) => {
       authorization: "authorization-text",
     },
     beforeUpload: (file) => {
-      debugger;
       if (
         file.type !== "application/vnd.ms-excel" ||
         file.type !==

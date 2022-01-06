@@ -162,7 +162,7 @@ export function getRoutes() {
             "routes": [
               {
                 "path": "/time/yieldInfo",
-                "name": "目标产量信息",
+                "name": "产量信息",
                 "icon": "smile",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__time__yieldInfo' */'D:/XIA/newest/lingwa_lds_SSAM/src/pages/time/yieldInfo'), loading: LoadingComponent}),
                 "exact": true
@@ -305,6 +305,13 @@ export function getRoutes() {
                 "name": "线体OEE查询",
                 "icon": "smile",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__search__lineOee' */'D:/XIA/newest/lingwa_lds_SSAM/src/pages/search/lineOee'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "path": "/search/productKe",
+                "name": "产品族KE查询",
+                "icon": "smile",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__search__productKe' */'D:/XIA/newest/lingwa_lds_SSAM/src/pages/search/productKe'), loading: LoadingComponent}),
                 "exact": true
               }
             ]

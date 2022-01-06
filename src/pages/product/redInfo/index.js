@@ -129,14 +129,12 @@ const redInfoComponent = ({
     //   // valueEnum: ['是', '否'],
     //   renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
     //     if (IsUpdate == true) {
-    //       debugger
     //       // 返回新的组件
     //       return <Select onChange={handleChange}>
     //         <Option value={true}>是</Option>
     //         <Option value={false}>否</Option>
     //       </Select>
     //     } else {
-    //       debugger
     //       return <Select>
     //         <Option value="是">是</Option>
     //         <Option value="否">否</Option>
@@ -224,7 +222,7 @@ const redInfoComponent = ({
 
   const handleAdd = async (fields) => {
     const hide = message.loading('正在添加');
-    debugger
+    
     try {
       let data = await addPost(
         {
@@ -258,7 +256,7 @@ const redInfoComponent = ({
   const handleUpdate = async (fields) => {
     const hide = message.loading('正在编辑');
     console.log('handleUpdate', fields)
-    debugger
+    
     try {
       let data = await updatePut({
         downtimeid: UpdateDate.downtimeid,

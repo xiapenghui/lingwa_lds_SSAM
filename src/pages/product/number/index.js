@@ -26,7 +26,7 @@ const numberComponent = ({
     TableList,
     typeList,
     riskList,
-    ProductTypeList,
+    ProductTypeListTrue,
     isNoList, } = number
   const [createModalVisible, handleModalVisible] = useState(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
@@ -82,14 +82,14 @@ const numberComponent = ({
       align: 'center',
       hideInSearch:true,
       hideInTable:true,
-      valueEnum: ProductTypeList.length == 0 ? {} : ProductTypeList,
+      valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
       initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        debugger
+        
         if (type === 'form' || type === 'table') {
           // 返回新的组件
           let newList = []
-          for (let [key, value] of Object.entries(ProductTypeList)) {
+          for (let [key, value] of Object.entries(ProductTypeListTrue)) {
             newList.push({ key: key, label: value.text })
           }
           return <Select

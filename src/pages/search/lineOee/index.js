@@ -103,26 +103,14 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       width: 120,
       hideInSearch: true,
       render: (text, record) => {
-        let color =
-          parseInt(record.OEE * 100) < record.targetke ? "red" : "green";
-        if (parseInt(record.OEE * 100) < record.targetke) {
-          return (
-            <Tag color={color}>
-              {record.OEE === "NaN" || record.OEE === "Infinity"
-                ? "0" + "%"
-                : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
-            </Tag>
-          );
-        } else {
           return (
             <span>
-              {" "}
               {record.OEE === "NaN" || record.OEE === "Infinity"
                 ? "0" + "%"
                 : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
             </span>
           );
-        }
+        
       },
     },
 
@@ -134,26 +122,13 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       width: 120,
       hideInSearch: true,
       render: (text, record) => {
-        let color =
-          parseInt(record.NEE * 100) < record.targetke ? "red" : "green";
-        if (parseInt(record.NEE * 100) < record.targetke) {
-          return (
-            <Tag color={color}>
-              {record.NEE === "NaN" || record.NEE === "Infinity"
-                ? "0" + "%"
-                : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
-            </Tag>
-          );
-        } else {
           return (
             <span>
-              {" "}
               {record.NEE === "NaN" || record.NEE === "Infinity"
                 ? "0" + "%"
                 : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
             </span>
           );
-        }
       },
     },
 
@@ -165,26 +140,13 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       width: 120,
       hideInSearch: true,
       render: (text, record) => {
-        let color =
-          parseInt(record.SUR * 100) < record.targetke ? "red" : "green";
-        if (parseInt(record.SUR * 100) < record.targetke) {
-          return (
-            <Tag color={color}>
-              {record.SUR === "NaN" || record.SUR === "Infinity"
-                ? "0" + "%"
-                : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
-            </Tag>
-          );
-        } else {
           return (
             <span>
-              {" "}
               {record.SUR === "NaN" || record.SUR === "Infinity"
                 ? "0" + "%"
                 : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
             </span>
           );
-        }
       },
     },
 
@@ -490,26 +452,14 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       width: 120,
       hideInSearch: true,
       render: (text, record) => {
-        let color =
-          parseInt(record.OEE * 100) < record.targetke ? "red" : "green";
-        if (parseInt(record.OEE * 100) < record.targetke) {
-          return (
-            <Tag color={color}>
-              {record.OEE === "NaN" || record.OEE === "Infinity"
-                ? "0" + "%"
-                : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
-            </Tag>
-          );
-        } else {
           return (
             <span>
-              {" "}
               {record.OEE === "NaN" || record.OEE === "Infinity"
                 ? "0" + "%"
                 : parseFloat((record.OEE * 100).toFixed(1)) + "%"}
             </span>
           );
-        }
+      
       },
     },
 
@@ -521,26 +471,14 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       width: 120,
       hideInSearch: true,
       render: (text, record) => {
-        let color =
-          parseInt(record.NEE * 100) < record.targetke ? "red" : "green";
-        if (parseInt(record.NEE * 100) < record.targetke) {
-          return (
-            <Tag color={color}>
-              {record.NEE === "NaN" || record.NEE === "Infinity"
-                ? "0" + "%"
-                : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
-            </Tag>
-          );
-        } else {
           return (
             <span>
-              {" "}
               {record.NEE === "NaN" || record.NEE === "Infinity"
                 ? "0" + "%"
                 : parseFloat((record.NEE * 100).toFixed(1)) + "%"}
             </span>
           );
-        }
+        
       },
     },
 
@@ -552,26 +490,14 @@ const productOeeComponent = ({ lineOee, dispatch }) => {
       width: 120,
       hideInSearch: true,
       render: (text, record) => {
-        let color =
-          parseInt(record.SUR * 100) < record.targetke ? "red" : "green";
-        if (parseInt(record.SUR * 100) < record.targetke) {
-          return (
-            <Tag color={color}>
-              {record.SUR === "NaN" || record.SUR === "Infinity"
-                ? "0" + "%"
-                : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
-            </Tag>
-          );
-        } else {
           return (
             <span>
-              {" "}
               {record.SUR === "NaN" || record.SUR === "Infinity"
                 ? "0" + "%"
                 : parseFloat((record.SUR * 100).toFixed(1)) + "%"}
             </span>
           );
-        }
+       
       },
     },
 

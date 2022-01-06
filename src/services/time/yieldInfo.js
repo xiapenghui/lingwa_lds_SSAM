@@ -76,7 +76,30 @@ export async function getTimeaxis(params) {
   });
 }
 
+//获取产品编号
+export async function GetproductnoText(params) {
+  return request(`${ip}/WebAPI/api/Common/GetproductnoText`, {
+    method: 'POST',
+    data: { ...params },
+  });
+}
+ 
 
+//获取线体编号
+export async function GetProductLineTextIdText(params) {
+  return request(`${ip}/WebAPI/api/Common/GetProductLine_noText`, {
+    method: 'POST',
+    data: { ...params },
+  });
+}
+
+//获取产品类型
+export async function getProductTypeTrue(params) {
+  return request(`${ip}/WebAPI/api/Common/GetproducttypeidText`, {
+    method: 'POST',
+    data: { ...params },
+  });
+}
  
 
 

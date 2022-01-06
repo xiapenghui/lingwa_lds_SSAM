@@ -1,36 +1,47 @@
 import { stringify } from 'querystring';
 import { history } from 'umi';
 import {
-  getProduct,
   postListInit,
+  getProduct,
   getArea,
+  getLine,
   getShif,
+  GetproductnoText,
+  GetProductLineTextIdText,
+  getProductTypeTrue,
   deleted,
   getAddDropDownInit,
   addPost,
-} from '@/services/search/productOee';
+} from '@/services/search/productKe';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { message } from 'antd';
 import { resolve } from 'path';
 
-const TableName = 'productOee'
+const TableName = 'productKe'
 const Model = {
   namespace: TableName,
   state: {
     TableList: [],
     productList: {},
     areaList: {},
+    lineList: {},
     shifList: {},
+    lineNoList: {},
+    ProductTypeListTrue: {},
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen((location) => {
-
         if (location.pathname == `/search/${TableName}`) {
           dispatch({
             type: 'getProduct',
+            payload: {}
+          })
+
+          dispatch({
+            type: 'getShif',
             payload: {}
           })
 
@@ -40,9 +51,19 @@ const Model = {
           })
 
           dispatch({
-            type: 'getShif',
+            type: 'getLine',
             payload: {}
           })
+
+          dispatch({
+            type: "GetProductLineTextIdText",
+            payload: {},
+          });
+
+          dispatch({
+            type: "getProductTypeTrue",
+            payload: {},
+          });
 
         }
       })
@@ -54,12 +75,9 @@ const Model = {
      * @param {getProduct} 查询初始化
      * @param {query} 查询
      */
-
-    // 查询工厂名称信息
     * getProduct({
       payload,
     }, { call, put, select }) {
-
       const data = yield call(getProduct)
       if (data.status !== '200') {
         return message.error(data.message);
@@ -74,7 +92,6 @@ const Model = {
         return message.success(data.message);
       }
     },
-
 
 
     // 区域信息
@@ -97,21 +114,18 @@ const Model = {
     },
 
 
-
-    // 班次
-    * getShif({
+    // 线体信息
+    * getLine({
       payload,
     }, { call, put, select }) {
-
-      const data = yield call(getShif)
+      const data = yield call(getLine)
       if (data.status !== '200') {
         return message.error(data.message);
       } else if (data.status == '200') {
-
         yield put({
           type: 'querySuccessed',
           payload: {
-            type: 'getShif',
+            type: 'getLine',
             data: data.list,
           }
         })
@@ -119,12 +133,69 @@ const Model = {
       }
     },
 
+     // 班次
+     * getShif({
+     payload,
+   }, { call, put, select }) {
+
+     const data = yield call(getShif)
+     if (data.status !== '200') {
+       return message.error(data.message);
+     } else if (data.status == '200') {
+
+       yield put({
+         type: 'querySuccessed',
+         payload: {
+           type: 'getShif',
+           data: data.list,
+         }
+       })
+       // return message.success(data.message);
+     }
+   },
+
+
+     //获取线体编号
+     *GetProductLineTextIdText({ payload }, { call, put, select }) {
+      const data = yield call(GetProductLineTextIdText);
+      if (data.status !== "200") {
+        return message.error(data.message);
+      } else if (data.status == "200") {
+        yield put({
+          type: "querySuccessed",
+          payload: {
+            type: "GetProductLineTextIdText",
+            data: data.list,
+          },
+        });
+        return message.success(data.message);
+      }
+    },
+
+
+     //获取产品类型信息
+     *getProductTypeTrue({ payload }, { call, put, select }) {
+      const data = yield call(getProductTypeTrue);
+      if (data.status !== "200") {
+        return message.error(data.message);
+      } else if (data.status == "200") {
+        yield put({
+          type: "querySuccessed",
+          payload: {
+            type: "getProductTypeTrue",
+            data: data.list,
+          },
+        });
+        return message.success(data.message);
+      }
+    },
+
+
 
 
     * query({
       payload,
     }, { call, put, select }) {
-      
       const data = yield call(postListInit, payload)
       if (data.status !== '200') {
         return message.error(data.message);
@@ -145,22 +216,45 @@ const Model = {
       if (payload.type === 'getProduct') {
         return {
           ...state, ...payload,
-          productList: payload.data
+          productList: payload.data,
         }
       }
       else if (payload.type === "getArea") {
-
         return {
           ...state, ...payload,
           areaList: payload.data
         }
       }
       else if (payload.type === "getShif") {
+
         return {
           ...state, ...payload,
           shifList: payload.data
         }
       }
+      else if (payload.type === "getLine") {
+
+        return {
+          ...state, ...payload,
+          lineList: payload.data
+        }
+      }
+
+      else if (payload.type === "GetProductLineTextIdText") {
+      
+        return {
+          ...state, ...payload,
+          lineNoList: payload.data
+        }
+      }
+
+      else if (payload.type === "getProductTypeTrue") {
+        return {
+          ...state, ...payload,
+          ProductTypeListTrue: payload.data
+        }
+      }
+
 
       else if (payload.type === 'postListInit') {
         return {

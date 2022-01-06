@@ -14,7 +14,7 @@ export async function getDropDownInit(params) {
 }
 
 //获取产品类型
-export async function getProductType(params) {
+export async function getProductTypeTrue(params) {
   return request(`${ip}/WebAPI/api/Common/GetproducttypeidText`, {
     method: 'POST',
     data: { ...params },

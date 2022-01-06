@@ -124,7 +124,7 @@ const Model = {
     * query({
       payload,
     }, { call, put, select }) {
-      debugger
+      
       const data = yield call(postListInit, payload)
       if (data.status !== '200') {
         return message.error(data.message);

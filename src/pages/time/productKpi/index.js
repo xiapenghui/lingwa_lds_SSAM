@@ -118,6 +118,7 @@ const productKpiComponent = ({
     },
 
 
+ 
     {
       title: '区域',
       dataIndex: 'areaid',
@@ -413,6 +414,7 @@ const productKpiComponent = ({
       departmentid: Number(params.departmentid),
       shiftid: Number(params.shiftid),
       supporttimeid: Number(params.supporttimeid),
+      productareaid:Number(params.areaid),
       lineid: Number(params.lineid),
       tsdate: params.tsdate,
       PageIndex: params.current,

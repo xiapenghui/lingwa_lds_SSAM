@@ -256,7 +256,7 @@ const Model = {
     * Modifyshiftclass({
       payload,
     }, { call, put, select }) {
-      debugger
+      
       const data = yield call(Modifyshiftclass, payload)
       if (data.status != '200') {
         return message.error(data.message);

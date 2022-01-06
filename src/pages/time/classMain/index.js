@@ -1,4 +1,4 @@
-import { PlusOutlined ,UploadOutlined } from '@ant-design/icons';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Row, Col, DatePicker, InputNumber, Radio, Select, message } from 'antd'
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, connect } from 'umi';
@@ -38,6 +38,7 @@ const Component = ({
     personList,
     areaList,
     lineList,
+    shifList,
     shiftTypeList,
 
   } = TableModelsData
@@ -58,7 +59,9 @@ const Component = ({
           employeeid: values.employeeid,
           areaid: values.areaid,
           lineid: values.lineid,
-          defalutshifttypeid: values.defalutshifttypeid,
+          // defalutshifttypeid: values.defalutshifttypeid,
+          shiftid :values.shiftid,
+
         }
         SearchTableList(Params, 1, pagination.PageSize)
       })
@@ -72,7 +75,8 @@ const Component = ({
       employeeid: form.getFieldValue("employeeid"),
       areaid: form.getFieldValue("areaid"),
       lineid: form.getFieldValue("lineid"),
-      defalutshifttypeid: form.getFieldValue("defalutshifttypeid"),
+      // defalutshifttypeid: form.getFieldValue("defalutshifttypeid"),
+      shiftid :form.getFieldValue("shiftid"),
     }
     SearchTableList(Params, PageIndex, PageSize)
   }
@@ -109,41 +113,6 @@ const Component = ({
       align: 'center',
       width: 200,
     },
-
-
-   
-    // {
-    //   title: '员工',
-    //   dataIndex: 'employeeid',
-    //   valueType: 'text',
-    //   align: 'center',
-    //   width: 150,
-    //   fixed:'left',
-    //   valueEnum: personList.length == 0 ? {} : personList,
-    //   // initialValue: !IsUpdate ? '' : (UpdateDate.employeeid ? UpdateDate.employeeid.toString() : ''),
-    //   initialValue:,
-    //   renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-    //     if (type === 'form' || type === 'table') {
-    //       // 返回新的组件
-    //       let newList = []
-    //       for (let [key, value] of Object.entries(personList)) {
-    //         newList.push({ key: key, label: value.text })
-    //       }
-    //       return <Select
-    //         allowClear
-    //         showSearch
-    //         optionFilterProp='children'
-    //       >
-    //         {newList.map(function (item, index) {
-    //           return <Select.Option key={index} value={item.key}>
-    //             {item.label}
-    //           </Select.Option>
-    //         })}
-    //       </Select>
-    //     }
-    //     return defaultRender(_);
-    //   },
-    // },
 
 
     {
@@ -250,40 +219,40 @@ const Component = ({
     //从这里要调用父组件来清空Form新增表单域
     // handleResetFields('AddFormLayout')
   }
- 
 
-    // 导出
-    const downloadExcel = async () => {
-      var option = {};
-      var dataTable = [];
-      if (TableData.length > 0) {
-        for (let i in TableData) {
-          let obj = {
-            'departmentshortname': TableData[i].departmentshortname,
-            'employeename': TableData[i].employeename,
-            'areaname':TableData[i].areaname,
-            'defaultlinename':TableData[i].defaultlinename,
-            'defalutshifttypename':TableData[i].defalutshifttypename,
-            'defaultshiftclassname':TableData[i].defaultshiftclassname,
-            'shifthour':TableData[i].shifthour,
 
-          };
-          dataTable.push(obj);
-        }
+  // 导出
+  const downloadExcel = async () => {
+    var option = {};
+    var dataTable = [];
+    if (TableData.length > 0) {
+      for (let i in TableData) {
+        let obj = {
+          'departmentshortname': TableData[i].departmentshortname,
+          'employeename': TableData[i].employeename,
+          'areaname': TableData[i].areaname,
+          'defaultlinename': TableData[i].defaultlinename,
+          'defalutshifttypename': TableData[i].defalutshifttypename,
+          'defaultshiftclassname': TableData[i].defaultshiftclassname,
+          'shifthour': TableData[i].shifthour,
+
+        };
+        dataTable.push(obj);
       }
-      option.fileName = '班别班次维护'
-      option.datas = [
-        {
-          sheetData: dataTable,
-          sheetName: 'sheet',
-          sheetFilter: ['departmentshortname', 'employeename', 'areaname','defaultlinename',
-        'defalutshifttypename','defaultshiftclassname','shifthour'],
-          sheetHeader: ['部门', '员工', '区域','线体','班别','班次','花费时间'],
-        }
-      ];
-      var toExcel = new ExportJsonExcel(option);
-      toExcel.saveExcel();
-    };
+    }
+    option.fileName = '班别班次维护'
+    option.datas = [
+      {
+        sheetData: dataTable,
+        sheetName: 'sheet',
+        sheetFilter: ['departmentshortname', 'employeename', 'areaname', 'defaultlinename',
+          'defalutshifttypename', 'defaultshiftclassname', 'shifthour'],
+        sheetHeader: ['部门', '员工', '区域', '线体', '班别', '班次', '花费时间'],
+      }
+    ];
+    var toExcel = new ExportJsonExcel(option);
+    toExcel.saveExcel();
+  };
 
 
   return (
@@ -355,7 +324,7 @@ const Component = ({
             </Form.Item>
           </Col>
 
-          <Col span={6} style={{ display: 'block' }}>
+          {/* <Col span={6} style={{ display: 'block' }}>
             <Form.Item
               name="defalutshifttypeid"
               label="班别"
@@ -366,6 +335,24 @@ const Component = ({
                 showSearch
               >
                 {shiftTypeList != null ? shiftTypeList.map(function (item, index) {
+                  return <Select.Option key={index} value={item.key}>{item.label}</Select.Option>
+                }) : ""}
+              </Select>
+            </Form.Item>
+          </Col> */}
+
+
+          <Col span={6} style={{ display: 'block' }}>
+            <Form.Item
+              name="shiftid"
+              label="班次"
+              {...formItemLayout}
+            >
+              <Select
+                allowClear
+                showSearch
+              >
+                {shifList != null ? shifList.map(function (item, index) {
                   return <Select.Option key={index} value={item.key}>{item.label}</Select.Option>
                 }) : ""}
               </Select>
@@ -400,10 +387,10 @@ const Component = ({
         </Row>
       </Form>
 
-  
+
       <TableComponents
         downloadExcel={downloadExcel}
-        scroll={{y: 500 }}
+        scroll={{ y: 500 }}
         tableName={TableName}
         data={TableData}
         tableLoading={tableLoading}
@@ -465,7 +452,7 @@ const Component = ({
         data={TableModelsData}
       />
 
-        
+
 
 
     </div>

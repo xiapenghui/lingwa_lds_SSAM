@@ -10,6 +10,9 @@ import {
   getArea,
   getLine,
   getRed,
+  GetproductnoText,
+  GetProductLineTextIdText,
+  getProductTypeTrue,
   deleted,
   getAddDropDownInit,
   addPost,
@@ -32,7 +35,10 @@ const Model = {
     areaList: {},
     lineList: {},
     redList: {},
-    timeaxisList: {}
+    timeaxisList: {},
+    lineNoList: {},
+    ProductNoList: {},
+    ProductTypeListTrue: {},
   },
 
   subscriptions: {
@@ -85,6 +91,21 @@ const Model = {
               "type": "T4"
             }
           })
+
+          dispatch({
+            type: "GetproductnoText",
+            payload: {},
+          });
+
+          dispatch({
+            type: "GetProductLineTextIdText",
+            payload: {},
+          });
+
+          dispatch({
+            type: "getProductTypeTrue",
+            payload: {},
+          });
 
 
         }
@@ -267,6 +288,59 @@ const Model = {
       }
     },
 
+    //获取产品编号
+    *GetproductnoText({ payload }, { call, put, select }) {
+      const data = yield call(GetproductnoText);
+      if (data.status !== "200") {
+        return message.error(data.message);
+      } else if (data.status == "200") {
+        yield put({
+          type: "querySuccessed",
+          payload: {
+            type: "GetproductnoText",
+            data: data.list,
+          },
+        });
+        return message.success(data.message);
+      }
+    },
+
+
+      //获取线体编号
+      *GetProductLineTextIdText({ payload }, { call, put, select }) {
+        const data = yield call(GetProductLineTextIdText);
+        if (data.status !== "200") {
+          return message.error(data.message);
+        } else if (data.status == "200") {
+          yield put({
+            type: "querySuccessed",
+            payload: {
+              type: "GetProductLineTextIdText",
+              data: data.list,
+            },
+          });
+          return message.success(data.message);
+        }
+      },
+
+
+      //获取产品类型信息
+    *getProductTypeTrue({ payload }, { call, put, select }) {
+      const data = yield call(getProductTypeTrue);
+      if (data.status !== "200") {
+        return message.error(data.message);
+      } else if (data.status == "200") {
+        yield put({
+          type: "querySuccessed",
+          payload: {
+            type: "getProductTypeTrue",
+            data: data.list,
+          },
+        });
+        return message.success(data.message);
+      }
+    },
+
 
 
 
@@ -350,7 +424,25 @@ const Model = {
         }
       }
 
+      else if (payload.type === "GetproductnoText") {
+        return {
+          ...state, ...payload,
+          ProductNoList: payload.data
+        }
+      }
+      else if (payload.type === "GetProductLineTextIdText") {
+        return {
+          ...state, ...payload,
+          lineNoList: payload.data
+        }
+      }
 
+      else if (payload.type === "getProductTypeTrue") {
+        return {
+          ...state, ...payload,
+          ProductTypeListTrue: payload.data
+        }
+      }
 
 
       else if (payload.type === 'postListInit') {

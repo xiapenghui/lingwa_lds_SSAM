@@ -103,7 +103,7 @@ const workHoursComponent = ({
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
         if (type == 'table') {
           // 返回新的组件
-          return <DatePicker picker="year" disabled />
+          return <DatePicker picker="year"  allowClear={false}/>
         }
         return defaultRender(_);
       },

@@ -59,7 +59,6 @@ const dayFrequencyComponent = ({
 
 
   useEffect(() => {
-    // debugger
     // setnewData(tsdate)
   }, []);
 

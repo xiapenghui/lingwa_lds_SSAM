@@ -202,7 +202,7 @@ export default defineConfig({
 
                 {
                   path: '/time/yieldInfo',
-                  name: '目标产量信息',
+                  name: '产量信息',
                   icon: 'smile',
                   component: '../pages/time/yieldInfo',
                 },
@@ -342,6 +342,13 @@ export default defineConfig({
                   name: '线体OEE查询',
                   icon: 'smile',
                   component: '../pages/search/lineOee',
+                },
+
+                {
+                  path: '/search/productKe',
+                  name: '产品族KE查询',
+                  icon: 'smile',
+                  component: '../pages/search/productKe',
                 },
               ],
             },

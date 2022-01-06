@@ -1,86 +1,85 @@
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { Button, message, DatePicker, Select, Input, Table } from 'antd';
+import { Button, message, DatePicker, Select, Tag, Checkbox } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, connect } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import moment from 'moment'
+import globalConfig from '../../../../config/defaultSettings';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
-import '../../../../src/assets/commonStyle.css';
-import globalConfig from '../../../../config/defaultSettings';
 import ExportJsonExcel from 'js-export-excel';
 import {
-  getDepartement,
+  getDropDownInit,
   postListInit,
-  getArea,
-  deleted,
+  // deleted,
   getAddDropDownInit,
-  addPost,
-  updatePut,
-} from '@/services/time/yieldInfo';
+  // addPost,
+  // updatePut,
+} from '@/services/search/productKe';
 
-const yieldInfoComponent = ({
-  yieldInfo,
+const productKeComponent = ({
+  productKe,
   dispatch
 }) => {
   const {
-    departmentList,
     productList,
-    personList,
-    shifList,
     areaList,
     lineList,
-    redList,
-    timeaxisList,
+    shifList,
     lineNoList,
-    ProductNoList,
-    ProductTypeListTrue 
-  } = yieldInfo
+    ProductTypeListTrue,
+  } = productKe
   const [createModalVisible, handleModalVisible] = useState(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
   const actionRef = useRef();
   const [selectedRowsState, setSelectedRows] = useState([]);
-
-
   /**
     * 编辑初始化
     */
   const [IsUpdate, setIsUpdate] = useState(false);
   const [UpdateDate, setUpdateDate] = useState({});
+  const [showKe, setshowKe] = useState(false);
   const [dataList, setDataList] = useState([]);
+
   const getColumns = () => [
 
 
+    // {
+    //   title: '时间从',
+    //   dataIndex: 'tsdateStart',
+    //   // valueType: 'dateTime',
+    //   valueType: 'date',
+    //   align: 'center',
+    //   width: 120,
+    //   hideInTable: true,
+    //   initialValue: new Date(),
+    //   initialValue: moment(UpdateDate.tsdateStart),
+    // },
+
+
+    // {
+    //   title: '时间至',
+    //   dataIndex: 'tsdateEnd',
+    //   // valueType: 'dateTime',
+    //   valueType: 'date',
+    //   align: 'center',
+    //   width: 120,
+    //   hideInTable: true,
+    //   initialValue: new Date(),
+    //   initialValue: moment(UpdateDate.tsdateEnd),
+    // },
 
     {
       title: '日期',
       dataIndex: 'TSDate',
-      // valueType: 'dateTime',
       valueType: 'date',
       align: 'center',
+      width: 120,
       fixed: 'left',
-      // hideInSearch: true,
-      // initialValue: IsUpdate ? UpdateDate.date : '',
-      initialValue: IsUpdate ? moment(UpdateDate.TSDate, globalConfig.form.onlyDateFormat) : moment(new Date()),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        if (type === 'form') {
-          // 返回新的组件
-          return <DatePicker style={{ width: '100%' }} format={globalConfig.form.onlyDateFormat} />
-        }
-        return defaultRender(_);
-      },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '日期不能为空!',
-          },
-        ],
-      },
+      initialValue: moment(new Date())
     },
-
 
 
     {
@@ -88,17 +87,17 @@ const yieldInfoComponent = ({
       dataIndex: 'shiftid',
       valueType: 'text',
       align: 'center',
+      width: 120,
       fixed: 'left',
       valueEnum: shifList.length == 0 ? {} : shifList,
+      // initialValue: IsUpdate ? UpdateDate.shiftid.toString() : '',
       initialValue: !IsUpdate ? '' : (UpdateDate.shiftid ? UpdateDate.shiftid.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        if (type === 'form') {
+        if (type === 'form' || type === 'table') {
           // 返回新的组件
           let newList = []
           for (let [key, value] of Object.entries(shifList)) {
-            if (value.text != '全部') {
-              newList.push({ key: key, label: value.text })
-            }
+            newList.push({ key: key, label: value.text })
           }
           return <Select
             allowClear
@@ -114,21 +113,47 @@ const yieldInfoComponent = ({
         }
         return defaultRender(_);
       },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '班次不能为空!',
-          },
-        ],
-      },
     },
 
     // {
-    //   title: '线体',
+    //   title: '区域',
+    //   dataIndex: 'productareaid',
+    //   valueType: 'text',
+    //   align: 'center',
+    //   width: 120,
+    //   fixed: 'left',
+    //   valueEnum: areaList.length == 0 ? {} : areaList,
+    //   // initialValue: IsUpdate ? UpdateDate.productareaid.toString() : '',
+    //   initialValue: !IsUpdate ? '' : (UpdateDate.productareaid ? UpdateDate.productareaid.toString() : ''),
+    //   renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
+    //     if (type === 'form' || type === 'table') {
+    //       // 返回新的组件
+    //       let newList = []
+    //       for (let [key, value] of Object.entries(areaList)) {
+    //         newList.push({ key: key, label: value.text })
+    //       }
+    //       return <Select
+    //         allowClear
+    //         showSearch
+    //         optionFilterProp='children'
+    //       >
+    //         {newList.map(function (item, index) {
+    //           return <Select.Option key={index} value={item.key}>
+    //             {item.label}
+    //           </Select.Option>
+    //         })}
+    //       </Select>
+    //     }
+    //     return defaultRender(_);
+    //   },
+    // },
+
+    // {
+    //   title: '线体名称',
     //   dataIndex: 'lineid',
     //   valueType: 'text',
     //   align: 'center',
+    //   width: 250,
     //   fixed: 'left',
     //   valueEnum: lineList.length == 0 ? {} : lineList,
     //   // initialValue: IsUpdate ? UpdateDate.lineid.toString() : '',
@@ -154,22 +179,69 @@ const yieldInfoComponent = ({
     //     }
     //     return defaultRender(_);
     //   },
-    //   formItemProps: {
-    //     rules: [
-    //       {
-    //         required: true,
-    //         message: '线体不能为空!',
-    //       },
-    //     ],
-    //   },
     // },
+
+
+    {
+      title: '产品族',
+      dataIndex: 'producttypeid',
+      valueType: 'text',
+      align: 'center',
+      // hideInSearch:true,
+      hideInTable:true,
+      valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
+      initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
+      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
+        
+        if (type === 'form' || type === 'table') {
+          // 返回新的组件
+          let newList = []
+          for (let [key, value] of Object.entries(ProductTypeListTrue)) {
+            newList.push({ key: key, label: value.text })
+          }
+          return <Select
+            allowClear
+            showSearch
+            optionFilterProp='children'
+          >
+            {newList.map(function (item, index) {
+              return <Select.Option key={index} value={item.key}>
+                {item.label}
+              </Select.Option>
+            })}
+          </Select>
+        }
+        return defaultRender(_);
+      },
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '产品类型不能为空!',
+          },
+        ],
+      },
+    },
+
+    
+
+    {
+      title: '产品族',
+      dataIndex: 'producttype',
+      valueType: 'text',
+      hideInSearch: true,
+      align: 'center',
+      fixed: 'left',
+      width: 120,
+    },
+
 
     {
       title: '线体编号',
       dataIndex: 'LineID',
       valueType: 'text',
       align: 'center',
-      // hideInTable:true,
+      hideInTable:true,
       width: 150,
       valueEnum: lineNoList.length == 0 ? {} : lineNoList,
       initialValue: !IsUpdate ? '' : (UpdateDate.LineID ? UpdateDate.LineID.toString() : ''),
@@ -207,249 +279,203 @@ const yieldInfoComponent = ({
 
 
 
-
-
-    {
-      title: '产品编号',
-      dataIndex: 'ProductID',
-      valueType: 'text',
-      align: 'center',
-      valueEnum: ProductNoList.length == 0 ? {} : ProductNoList,
-      initialValue: !IsUpdate ? '' : (UpdateDate.ProductID ? UpdateDate.ProductID.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(ProductNoList)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '产品类型不能为空!',
-          },
-        ],
-      },
-    },
-
-
-    {
-      title: '产品族',
-      dataIndex: 'producttypeid',
-      valueType: 'text',
-      align: 'center',
-      // hideInSearch:true,
-      hideInTable:true,
-      hideInForm:true,
-      valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
-      initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(ProductTypeListTrue)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '产品类型不能为空!',
-          },
-        ],
-      },
-    },
-
-
-
-
     
 
     {
-      title: '产品族',
-      dataIndex: 'producttype',
+      title: '线体编号',
+      dataIndex: 'Line_no',
       valueType: 'text',
-      align: 'center',
       hideInSearch: true,
-      hideInForm: true,
+      hideInForm:true,
+      align: 'center',
+      fixed: 'left',
+      width: 120,
     },
 
 
     {
-      title: 'OT',
-      dataIndex: 'OT',
+      title: '目标KE',
+      dataIndex: 'TargetKE',
       valueType: 'text',
-      align: 'center',
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.OT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'OT不能为空!',
-          },
-        ],
-      },
+      align: 'center',
+      fixed: 'left',
+      width: 120,
+      render: (text) => {
+        return text + '%';
+      }
+    },
+
+    {
+      title: '目标IE',
+      dataIndex: 'TargetIE',
+      valueType: 'text',
+      hideInSearch: true,
+      align: 'center',
+      width: 120,
+      fixed: 'left',
+      render: (text) => {
+        return text + '%';
+      }
     },
 
     {
       title: 'UT',
       dataIndex: 'UT',
       valueType: 'text',
-      align: 'center',
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.UT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'UT不能为空!',
-          },
-        ],
-      },
+      align: 'center',
+      width: 120,
     },
 
     {
       title: 'DT',
       dataIndex: 'DT',
       valueType: 'text',
-      align: 'center',
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.DT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'DT不能为空!',
-          },
-        ],
-      },
+      align: 'center',
+      width: 120,
     },
 
     {
-      title: 'POT',
-      dataIndex: 'POT',
+      title: 'OT',
+      dataIndex: 'OT',
       valueType: 'text',
-      align: 'center',
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.POT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'POT不能为空!',
-          },
-        ],
-      },
+      align: 'center',
+      width: 120,
     },
 
     {
-      title: 'SPT',
-      dataIndex: 'SPT',
+      title: 'TS',
+      dataIndex: 'TS',
       valueType: 'text',
-      align: 'center',
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.SPT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'SPT不能为空!',
-          },
-        ],
-      },
+      align: 'center',
+      width: 120,
+
+    },
+
+    {
+      title: 'IE',
+      dataIndex: 'IE',
+      valueType: 'text',
+      hideInSearch: true,
+      align: 'center',
+      width: 120,
+      render: (text, record) => {
+        let color = parseInt(record.IE * 100) < record.TargetIE ? 'red' : 'green';
+        if (parseInt(record.IE * 100) < record.TargetIE) {
+          return (
+            <Tag color={color}>
+              {record.IE === "NaN" || record.IE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.IE * 100).toFixed(1)) + "%"}
+            </Tag>
+          )
+        } else {
+          return <span> {
+            record.IE === "NaN" || record.IE === "Infinity"
+              ? "0" + "%"
+              : parseFloat((record.IE * 100).toFixed(1)) + "%"
+          }</span>
+        }
+      }
     },
 
 
+
+    {
+      title: 'KE',
+      dataIndex: 'KE',
+      valueType: 'text',
+      hideInSearch: true,
+      align: 'center',
+      width: 120,
+      render: (text, record) => {
+        let color = parseInt(record.KE * 100) < record.TargetKE ? 'red' : 'green';
+        if (parseInt(record.KE * 100) < record.TargetKE) {
+          return (
+            <Tag color={color}>
+              {record.KE === "NaN" || record.KE === "Infinity"
+                ? "0" + "%"
+                : parseFloat((record.KE * 100).toFixed(1)) + "%"}
+            </Tag>
+          )
+        } else {
+          return <span> {record.KE === "NaN" || record.KE === "Infinity"
+            ? "0" + "%"
+            : parseFloat((record.KE * 100).toFixed(1)) + "%"}</span>
+        }
+      }
+    },
+
+    {
+      title: 'KS',
+      dataIndex: 'KS',
+      valueType: 'text',
+      hideInSearch: true,
+      align: 'center',
+      width: 120,
+      render: (text) => {
+        return (text === "NaN" || text === "Infinity")
+          ? "0" + "%" : parseFloat((text * 100).toFixed(1)) + "%";
+      }
+    },
 
     {
       title: '产量',
       dataIndex: 'GoodParts',
       valueType: 'text',
-      align: 'center',
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.GoodParts : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '产量不能为空!',
-          },
-        ],
-      },
-    },
-
-
-
-    {
-      title: '操作',
-      dataIndex: 'option',
-      valueType: 'option',
       align: 'center',
-      render: (_, record) => (
-        <>
-
-          <a onClick={() => {
-            setIsUpdate(true)
-            setUpdateDate({ ...record });
-            handleUpdateModalVisible(true);
-          }}
-          >编辑</a>
-        </>
-      ),
+      width: 120,
     },
+
+
+  
+
+
+    // {
+    //   title: '操作',
+    //   dataIndex: 'option',
+    //   valueType: 'option',
+    // align: 'center',
+    //   render: (_, record) => (
+    //     <>
+
+    //       <a onClick={() => {
+    //         setIsUpdate(true)
+    //         setUpdateDate({ ...record });
+    //         handleUpdateModalVisible(true);
+    //       }}
+    //       >编辑</a>
+    //     </>
+    //   ),
+    // },
   ];
 
 
-
-
+  //达标不达标勾选
+  const onChangeBox = (e) => {
+    (e.target.checked)
+  }
 
   const query = async (params, sorter, filter) => {
-      const TableList = postListInit({
-      shiftid: Number(params.shiftid),
+    const TableList = postListInit({
+      familyid: Number(params.familyid),
+      productareaid: Number(params.productareaid),
       lineid: Number(params.LineID),
-      productid:params.ProductID,
+      shiftid: Number(params.shiftid),
       producttypeid:params.producttypeid,
       TSDate: params.TSDate,
       PageIndex: params.current,
       PageSize: params.pageSize,
-
     })
     return TableList.then(function (value) {
-      setDataList(value.list);
+      setDataList(value.list.sum);
       return {
-        data: value.list,
+        data: value.list.sum,
         current: value.pageNum,
         pageSize: value.pageSize,
         success: true,
@@ -467,20 +493,8 @@ const yieldInfoComponent = ({
 
   const handleAdd = async (fields) => {
     const hide = message.loading('正在添加');
-    let params = {
-      shiftid: Number(fields.shiftid) == null ? '' : Number(fields.shiftid),
-      TSDate: fields.TSDate,
-      LineID: fields.LineID,
-      ProductID: fields.ProductID,
-      OT: fields.OT,
-      UT: fields.UT,
-      DT: fields.DT,
-      POT: fields.POT,
-      SPT: fields.SPT,
-      GoodParts: fields.GoodParts
-    }
     try {
-      let data = await addPost(params);
+      let data = await addPost({ data: fields });
       if (data.status == '200') {
         hide();
         message.success(data.message);
@@ -502,20 +516,9 @@ const yieldInfoComponent = ({
 
   const handleUpdate = async (fields) => {
     const hide = message.loading('正在编辑');
+    console.log('handleUpdate', fields)
     try {
-      let data = await updatePut({
-        ID: UpdateDate.ID,
-        shiftid: Number(fields.shiftid),
-        TSDate: fields.TSDate,
-        LineID: fields.LineID,
-        ProductID: fields.ProductID,
-        OT: fields.OT,
-        UT: fields.UT,
-        DT: fields.DT,
-        POT: fields.POT,
-        SPT: fields.SPT,
-        GoodParts: fields.GoodParts
-      });
+      let data = await updatePut({ data: { id: UpdateDate.id, ...fields } });
       if (data.status == '200') {
         hide();
         message.success(data.message);
@@ -526,7 +529,6 @@ const yieldInfoComponent = ({
       }
     } catch (error) {
       message.error('编辑失败请重试！');
-      hide();
       return false;
     }
   };
@@ -541,7 +543,7 @@ const yieldInfoComponent = ({
 
     try {
       let data = await deleted({
-        ids: selectedRows.map((row) => row.ID),
+        data: selectedRows.map((row) => row.customer),
       });
 
       if (data.status == '200') {
@@ -560,39 +562,46 @@ const yieldInfoComponent = ({
     }
   };
 
+
   // 导出
   const downloadExcel = async () => {
     var option = {};
     var dataTable = [];
     if (dataList.length > 0) {
       for (let i in dataList) {
+        debugger
         let obj = {
           'TSDate': dataList[i].TSDate,
           'shiftname': dataList[i].shiftname,
+          'producttype': dataList[i].producttype,
           'Line_no': dataList[i].Line_no,
-          'productno': dataList[i].productno,
-          'OT': dataList[i].OT,
+          'TargetKE': parseInt(dataList[i].TargetKE) + '%',
+          'TargetIE': parseInt(dataList[i].TargetIE) + '%',
           'UT': dataList[i].UT,
           'DT': dataList[i].DT,
-          'POT': dataList[i].POT,
-          'SPT': dataList[i].SPT,
-          'GoodParts': dataList[i].GoodParts
-        };
+          'OT': dataList[i].OT,
+          'TS': dataList[i].TS,
+          'IE': parseInt(dataList[i].IE * 100) + '%',
+          'KE': parseInt(dataList[i].KE * 100) + '%',
+          'KS': parseInt(dataList[i].KS * 100) + '%',
+          'GoodParts': dataList[i].GoodParts,
+        }
         dataTable.push(obj);
       }
     }
-    option.fileName = '产量信息'
+    option.fileName = '产品族KE查询'
     option.datas = [
       {
         sheetData: dataTable,
         sheetName: 'sheet',
-        sheetFilter: ['TSDate', 'shiftname', 'Line_no', 'productno', 'OT', 'UT', 'DT', 'POT', 'SPT', 'GoodParts'],
-        sheetHeader: ['日期', '班次', '线体编号', '产品编号', 'OT', 'UT', 'DT', 'POT', 'SPT', '产量'],
+        sheetFilter: ['TSDate', 'shiftname', 'producttype', 'Line_no', 'TargetKE',  'TargetIE', 'UT', 'DT', 'OT', 'TS', 'IE', 'KE', 'KS', 'GoodParts'],
+        sheetHeader: ['日期', '班次', '产品族', '线体编号','目标IE','目标IE','UT', 'DT', 'OT', 'TS', 'IE', 'KE', 'KS', '产量'],
       }
     ];
+
     var toExcel = new ExportJsonExcel(option);
     toExcel.saveExcel();
-  };
+  }
 
 
 
@@ -602,17 +611,17 @@ const yieldInfoComponent = ({
       <ProTable
         headerTitle="查询表格"
         actionRef={actionRef}
-        scroll={{ y: 500 }}
+        scroll={{ x: 2000, y: 500 }}
         pagination={false}
-        rowKey="ID"
+        rowKey="row"
         search={{
           labelWidth: 120,
           defaultCollapsed: false,
         }}
         toolBarRender={() => [
-          <Button type="primary" onClick={() => handleModalVisible(true)}>
-            <PlusOutlined /> 新建
-          </Button>,
+          // <Button type="primary" onClick={() => handleModalVisible(true)}>
+          //   <PlusOutlined /> 新建
+          // </Button>,
           <Button type="primary" onClick={() => downloadExcel()}>
             <UploadOutlined /> 导出
           </Button>,
@@ -642,7 +651,7 @@ const yieldInfoComponent = ({
             </div>
           }
         >
-          <Button
+          {/* <Button
             onClick={async () => {
               await handleRemove(selectedRowsState);
               setSelectedRows([]);
@@ -650,7 +659,17 @@ const yieldInfoComponent = ({
             }}
           >
             批量删除
-          </Button>
+          </Button> */}
+
+          {/* <Button
+            onClick={async () => {
+              await downloadExcel(selectedRowsState);
+              setSelectedRows([]);
+              actionRef.current?.reloadAndRest?.();
+            }}
+          >
+            批量导出
+          </Button> */}
 
         </FooterToolbar>
       )}
@@ -671,7 +690,7 @@ const yieldInfoComponent = ({
               }
             }
           }}
-          rowKey="ID"
+          rowKey="row"
           type="form"
           columns={getColumns()}
         />
@@ -700,7 +719,7 @@ const yieldInfoComponent = ({
                 }
               }
             }}
-            rowKey="ID"
+            rowKey="row"
             type="form"
             columns={getColumns()}
 
@@ -712,7 +731,7 @@ const yieldInfoComponent = ({
   );
 };
 
-export default connect(({ yieldInfo }) => ({ yieldInfo }))(yieldInfoComponent);
+export default connect(({ productKe }) => ({ productKe }))(productKeComponent);
 
 
 
