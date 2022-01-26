@@ -89,6 +89,7 @@ const productKeComponent = ({
       align: 'center',
       width: 120,
       fixed: 'left',
+      hideInTable: true,
       valueEnum: shifList.length == 0 ? {} : shifList,
       // initialValue: IsUpdate ? UpdateDate.shiftid.toString() : '',
       initialValue: !IsUpdate ? '' : (UpdateDate.shiftid ? UpdateDate.shiftid.toString() : ''),
@@ -114,6 +115,22 @@ const productKeComponent = ({
         return defaultRender(_);
       },
     },
+
+
+
+    
+
+    {
+      title: '班次',
+      dataIndex: 'shiftname',
+      valueType: 'text',
+      hideInSearch: true,
+      align: 'center',
+      fixed: 'left',
+      width: 120,
+    },
+
+
 
     // {
     //   title: '区域',
