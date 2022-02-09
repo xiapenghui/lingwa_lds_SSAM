@@ -158,15 +158,7 @@ const lineComponent = ({ line, dispatch }) => {
       align: "center",
       hideInSearch: true,
       initialValue: IsUpdate ? UpdateDate.linetype : "",
-      valueEnum: ["KE", "OEE"],
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: "线体属性不能为空!",
-          },
-        ],
-      },
+      valueEnum: ["KE", "OEE"]
     },
 
     {
@@ -176,15 +168,7 @@ const lineComponent = ({ line, dispatch }) => {
       align: "center",
       hideInSearch: true,
       initialValue: IsUpdate ? UpdateDate.weldtype : "",
-      valueEnum: ["焊接", "非焊接"],
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: "焊接属性不能为空!",
-          },
-        ],
-      },
+      valueEnum: ["焊接", "非焊接"]
     },
 
     {
