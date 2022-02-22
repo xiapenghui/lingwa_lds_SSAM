@@ -425,8 +425,8 @@ const personnelComponent = ({ personnel, dispatch }) => {
         areaid: Number(fields.areaid),
         defaultlineid: Number(fields.defaultlineid),
         defaultshiftclass: Number(fields.defaultshiftclass),
-        state: Number(fields.state),
-        pattributes: Number(fields.pattributes),
+        state: /^[\u4e00-\u9fa5]+$/i.test(fields.state) == true ? UpdateDate.stateid : fields.state ,
+        pattributes: /^[\u4e00-\u9fa5]+$/i.test(fields.pattributes) == true ? UpdateDate.pattributesid : fields.pattributes,
         remark: fields.remark,
       });
       if (data.status == "200") {

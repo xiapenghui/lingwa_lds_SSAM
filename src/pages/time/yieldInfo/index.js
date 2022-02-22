@@ -165,6 +165,57 @@ const yieldInfoComponent = ({
     // },
 
     {
+      title: '产品族',
+      dataIndex: 'producttypeid',
+      valueType: 'text',
+      align: 'center',
+      // hideInSearch:true,
+      hideInTable:true,
+      hideInForm:true,
+      valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
+      initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
+      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
+        
+        if (type === 'form' || type === 'table') {
+          // 返回新的组件
+          let newList = []
+          for (let [key, value] of Object.entries(ProductTypeListTrue)) {
+            newList.push({ key: key, label: value.text })
+          }
+          return <Select
+            allowClear
+            showSearch
+            optionFilterProp='children'
+          >
+            {newList.map(function (item, index) {
+              return <Select.Option key={index} value={item.key}>
+                {item.label}
+              </Select.Option>
+            })}
+          </Select>
+        }
+        return defaultRender(_);
+      },
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '产品类型不能为空!',
+          },
+        ],
+      },
+    },
+
+    {
+      title: '产品族',
+      dataIndex: 'producttype',
+      valueType: 'text',
+      align: 'center',
+      hideInSearch: true,
+      hideInForm: true,
+    },
+
+    {
       title: '线体编号',
       dataIndex: 'LineID',
       valueType: 'text',
@@ -204,9 +255,6 @@ const yieldInfoComponent = ({
         ],
       },
     },
-
-
-
 
 
     {
@@ -249,61 +297,7 @@ const yieldInfoComponent = ({
     },
 
 
-    {
-      title: '产品族',
-      dataIndex: 'producttypeid',
-      valueType: 'text',
-      align: 'center',
-      // hideInSearch:true,
-      hideInTable:true,
-      hideInForm:true,
-      valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
-      initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(ProductTypeListTrue)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '产品类型不能为空!',
-          },
-        ],
-      },
-    },
-
-
-
-
-    
-
-    {
-      title: '产品族',
-      dataIndex: 'producttype',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      hideInForm: true,
-    },
+ 
 
 
     {
@@ -569,6 +563,7 @@ const yieldInfoComponent = ({
         let obj = {
           'TSDate': dataList[i].TSDate,
           'shiftname': dataList[i].shiftname,
+          'producttype':dataList[i].producttype,
           'Line_no': dataList[i].Line_no,
           'productno': dataList[i].productno,
           'OT': dataList[i].OT,
@@ -586,8 +581,8 @@ const yieldInfoComponent = ({
       {
         sheetData: dataTable,
         sheetName: 'sheet',
-        sheetFilter: ['TSDate', 'shiftname', 'Line_no', 'productno', 'OT', 'UT', 'DT', 'POT', 'SPT', 'GoodParts'],
-        sheetHeader: ['日期', '班次', '线体编号', '产品编号', 'OT', 'UT', 'DT', 'POT', 'SPT', '产量'],
+        sheetFilter: ['TSDate', 'shiftname', 'producttype', 'Line_no', 'productno', 'OT', 'UT', 'DT', 'POT', 'SPT', 'GoodParts'],
+        sheetHeader: ['日期', '班次', '线体编号', '产品族', '产品编号', 'OT', 'UT', 'DT', 'POT', 'SPT', '产量'],
       }
     ];
     var toExcel = new ExportJsonExcel(option);
