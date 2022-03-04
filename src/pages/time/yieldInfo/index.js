@@ -36,7 +36,7 @@ const yieldInfoComponent = ({
     timeaxisList,
     lineNoList,
     ProductNoList,
-    ProductTypeListTrue 
+    ProductTypeListTrue
   } = yieldInfo
   const [createModalVisible, handleModalVisible] = useState(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
@@ -61,6 +61,11 @@ const yieldInfoComponent = ({
       valueType: 'date',
       align: 'center',
       fixed: 'left',
+      sorter: (a, b) => {
+        let aTime = new Date(a.TSDate).getTime();
+        let bTime = new Date(b.TSDate).getTime();
+        return aTime - bTime;
+      },
       // hideInSearch: true,
       // initialValue: IsUpdate ? UpdateDate.date : '',
       initialValue: IsUpdate ? moment(UpdateDate.TSDate, globalConfig.form.onlyDateFormat) : moment(new Date()),
@@ -89,6 +94,11 @@ const yieldInfoComponent = ({
       valueType: 'text',
       align: 'center',
       fixed: 'left',
+      sorter: (a, b) => {
+        let abanci = a.shiftid;
+        let bbanci = b.shiftid;
+        return abanci - bbanci;
+      },
       valueEnum: shifList.length == 0 ? {} : shifList,
       initialValue: !IsUpdate ? '' : (UpdateDate.shiftid ? UpdateDate.shiftid.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
@@ -170,12 +180,12 @@ const yieldInfoComponent = ({
       valueType: 'text',
       align: 'center',
       // hideInSearch:true,
-      hideInTable:true,
-      hideInForm:true,
+      hideInTable: true,
+      hideInForm: true,
       valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
       initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        
+
         if (type === 'form' || type === 'table') {
           // 返回新的组件
           let newList = []
@@ -211,6 +221,7 @@ const yieldInfoComponent = ({
       dataIndex: 'producttype',
       valueType: 'text',
       align: 'center',
+      sorter: (a, b) => a.producttype.length - b.producttype.length,
       hideInSearch: true,
       hideInForm: true,
     },
@@ -220,12 +231,11 @@ const yieldInfoComponent = ({
       dataIndex: 'LineID',
       valueType: 'text',
       align: 'center',
-      // hideInTable:true,
+      sorter: (a, b) => a.Line_no.length - b.Line_no.length,
       width: 150,
       valueEnum: lineNoList.length == 0 ? {} : lineNoList,
       initialValue: !IsUpdate ? '' : (UpdateDate.LineID ? UpdateDate.LineID.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-
         if (type === 'form' || type === 'table') {
           // 返回新的组件
           let newList = []
@@ -262,6 +272,7 @@ const yieldInfoComponent = ({
       dataIndex: 'ProductID',
       valueType: 'text',
       align: 'center',
+      sorter: (a, b) => a.productno.length - b.productno.length,
       valueEnum: ProductNoList.length == 0 ? {} : ProductNoList,
       initialValue: !IsUpdate ? '' : (UpdateDate.ProductID ? UpdateDate.ProductID.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
@@ -297,7 +308,7 @@ const yieldInfoComponent = ({
     },
 
 
- 
+
 
 
     {
@@ -430,11 +441,11 @@ const yieldInfoComponent = ({
 
 
   const query = async (params, sorter, filter) => {
-      const TableList = postListInit({
+    const TableList = postListInit({
       shiftid: Number(params.shiftid),
       lineid: Number(params.LineID),
-      productid:params.ProductID,
-      producttypeid:params.producttypeid,
+      productid: params.ProductID,
+      producttypeid: params.producttypeid,
       TSDate: params.TSDate,
       PageIndex: params.current,
       PageSize: params.pageSize,
@@ -563,7 +574,7 @@ const yieldInfoComponent = ({
         let obj = {
           'TSDate': dataList[i].TSDate,
           'shiftname': dataList[i].shiftname,
-          'producttype':dataList[i].producttype,
+          'producttype': dataList[i].producttype,
           'Line_no': dataList[i].Line_no,
           'productno': dataList[i].productno,
           'OT': dataList[i].OT,

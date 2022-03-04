@@ -1,5 +1,5 @@
-import { PlusOutlined ,UploadOutlined} from '@ant-design/icons';
-import { Button, message ,Select  } from 'antd';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { Button, message, Select } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, connect } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -80,12 +80,12 @@ const numberComponent = ({
       dataIndex: 'producttypeid',
       valueType: 'text',
       align: 'center',
-      hideInSearch:true,
-      hideInTable:true,
+      hideInSearch: true,
+      hideInTable: true,
       valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
       initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        
+
         if (type === 'form' || type === 'table') {
           // 返回新的组件
           let newList = []
@@ -121,8 +121,25 @@ const numberComponent = ({
       dataIndex: 'producttype',
       valueType: 'text',
       align: 'center',
-      hideInSearch:true,
-      hideInForm:true,
+      hideInSearch: true,
+      hideInForm: true,
+    },
+
+    {
+      title: 'Cama',
+      dataIndex: 'cama',
+      valueType: 'text',
+      align: 'center',
+      hideInSearch: true,
+      initialValue: IsUpdate ? UpdateDate.cama : '',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: 'Cama不能为空!',
+          },
+        ],
+      },
     },
 
     {
@@ -130,6 +147,7 @@ const numberComponent = ({
       dataIndex: 'remark',
       valueType: 'textarea',
       align: 'center',
+      width:200,
       hideInSearch: true,
       initialValue: IsUpdate ? UpdateDate.remark : '',
     },
@@ -171,7 +189,7 @@ const numberComponent = ({
       }
     });
   };
- 
+
   /**
    * 添加节点
    * @param fields
@@ -258,7 +276,8 @@ const numberComponent = ({
           'productno': dataList[i].productno,
           'productname': dataList[i].productname,
           'producttype': dataList[i].producttype,
-          'remark':dataList[i].remark,
+          'cama': dataList[i].cama,
+          'remark': dataList[i].remark,
         }
         dataTable.push(obj);
       }
@@ -268,8 +287,8 @@ const numberComponent = ({
       {
         sheetData: dataTable,
         sheetName: 'sheet',
-        sheetFilter: ['productno', 'productname','producttype','remark'],
-        sheetHeader: ['产品编号', '产品名称', '产品类型', '备注'],
+        sheetFilter: ['productno', 'productname', 'producttype', 'cama', 'remark'],
+        sheetHeader: ['产品编号', '产品名称', '产品类型', 'Cama', '备注'],
       }
     ];
 
@@ -296,8 +315,8 @@ const numberComponent = ({
             <PlusOutlined /> 新建
           </Button>,
           <Button type="primary" onClick={() => downloadExcel()}>
-          <UploadOutlined /> 导出
-        </Button>,
+            <UploadOutlined /> 导出
+          </Button>,
 
         ]}
         request={(params, sorter, filter) => query(params, sorter, filter)}
