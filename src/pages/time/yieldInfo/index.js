@@ -328,39 +328,7 @@ const yieldInfoComponent = ({
       },
     },
 
-    {
-      title: 'UT',
-      dataIndex: 'UT',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.UT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'UT不能为空!',
-          },
-        ],
-      },
-    },
-
-    {
-      title: 'DT',
-      dataIndex: 'DT',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.DT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'DT不能为空!',
-          },
-        ],
-      },
-    },
+   
 
     {
       title: 'POT',
@@ -380,25 +348,6 @@ const yieldInfoComponent = ({
     },
 
     {
-      title: 'SPT',
-      dataIndex: 'SPT',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.SPT : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'SPT不能为空!',
-          },
-        ],
-      },
-    },
-
-
-
-    {
       title: '产量',
       dataIndex: 'GoodParts',
       valueType: 'text',
@@ -413,6 +362,32 @@ const yieldInfoComponent = ({
           },
         ],
       },
+    },
+
+    {
+      title: 'UT',
+      dataIndex: 'UT',
+      valueType: 'text',
+      align: 'center',
+      hideInSearch: true,
+      initialValue: IsUpdate ? UpdateDate.UT : '',
+    },
+
+    {
+      title: 'DT',
+      dataIndex: 'DT',
+      valueType: 'text',
+      align: 'center',
+      hideInSearch: true,
+      initialValue: IsUpdate ? UpdateDate.DT : '',
+    },
+    {
+      title: 'SPT',
+      dataIndex: 'SPT',
+      valueType: 'text',
+      align: 'center',
+      hideInSearch: true,
+      initialValue: IsUpdate ? UpdateDate.SPT : '',
     },
 
 

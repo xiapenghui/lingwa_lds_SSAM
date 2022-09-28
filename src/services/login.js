@@ -5,7 +5,6 @@ const path = `${globalConfig.ip}:${globalConfig.port.sspalds_role}/sspalds-role`
 // const path = "http://10.208.2.7:8072/sspalds-role";
 // const path = "http://192.168.1.150:8072/sspalds-role";
 export async function fakeAccountLogin(params) {
-  debugger
   return request(`${path}/api/login/account`, {
     // return request('/api/login/account', {
     method: 'POST',

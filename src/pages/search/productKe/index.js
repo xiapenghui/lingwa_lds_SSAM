@@ -586,7 +586,6 @@ const productKeComponent = ({
     var dataTable = [];
     if (dataList.length > 0) {
       for (let i in dataList) {
-        debugger
         let obj = {
           'TSDate': dataList[i].TSDate,
           'shiftname': dataList[i].shiftname,
