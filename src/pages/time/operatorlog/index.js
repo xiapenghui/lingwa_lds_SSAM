@@ -60,6 +60,7 @@ const unscheduledComponent = ({
       align: 'center',
       width: 150,
       fixed: 'left',
+      hideInTable: true,
       valueEnum: personList.length == 0 ? {} : personList,
       initialValue: !IsUpdate ? '' : (UpdateDate.employeeid ? UpdateDate.employeeid.toString() : ''),
       renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
@@ -85,6 +86,17 @@ const unscheduledComponent = ({
       },
 
     },
+
+    {
+      title: '姓名',
+      dataIndex: 'OperatorName',
+      valueType: 'text',
+      align: 'center',
+      hideInSearch: true,
+      hideInForm:true,
+    },
+
+
 
 
 

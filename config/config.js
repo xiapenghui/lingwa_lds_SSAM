@@ -146,6 +146,13 @@ export default defineConfig({
               routes: [
 
                 {
+                  path: '/product/pprType',
+                  name: 'PPR类型管理',
+                  icon: 'smile',
+                  component: '../pages/product/pprType',
+                },
+
+                {
                   path: '/product/number',
                   name: '产品信息',
                   icon: 'smile',
@@ -280,8 +287,15 @@ export default defineConfig({
                   name: 'T5信息',
                   icon: 'smile',
                   component: '../pages/time/timeT5',
-                }
+                },
 
+                {
+                  path: '/time/pprInfo',
+                  name: 'PPR维护',
+                  icon: 'smile',
+                  component: '../pages/time/pprInfo',
+                },
+ 
               ],
             },
 

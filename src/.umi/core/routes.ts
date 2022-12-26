@@ -105,6 +105,13 @@ export function getRoutes() {
             "icon": "BarChartOutlined",
             "routes": [
               {
+                "path": "/product/pprType",
+                "name": "PPR类型管理",
+                "icon": "smile",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__product__pprType' */'D:/XIA/newest/lingwa_lds_SSAM/src/pages/product/pprType'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
                 "path": "/product/number",
                 "name": "产品信息",
                 "icon": "smile",
@@ -242,6 +249,13 @@ export function getRoutes() {
                 "name": "T5信息",
                 "icon": "smile",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__time__timeT5' */'D:/XIA/newest/lingwa_lds_SSAM/src/pages/time/timeT5'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "path": "/time/pprInfo",
+                "name": "PPR维护",
+                "icon": "smile",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__time__pprInfo' */'D:/XIA/newest/lingwa_lds_SSAM/src/pages/time/pprInfo'), loading: LoadingComponent}),
                 "exact": true
               }
             ]

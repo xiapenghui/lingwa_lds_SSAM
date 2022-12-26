@@ -5,25 +5,11 @@ const ip = `${globalConfig.ip}:${globalConfig.port.yshyerp_sspa}`
 
 /**
  * 查询条件初始化
- */
-export async function getDropDownInit(params) {
-  return request(`${ip}/WebAPI/api/Common/GetProductAreaTextValuePair`, {
-    method: 'POST',
-    data: { ...params },
-  });
-}
+//  */
 
-//获取产品类型
-export async function getProductTypeTrue(params) {
-  return request(`${ip}/WebAPI/api/Common/GetproducttypeidText`, {
-    method: 'POST',
-    data: { ...params },
-  });
-}
- 
 
  //获取PPR类型
- export async function GetproductnoText(params) {
+export async function GetproductnoText(params) {
   return request(`${ip}/WebAPI/api/Common/GetProductPPRText`, {
     method: 'POST',
     data: { ...params },
@@ -34,19 +20,19 @@ export async function getProductTypeTrue(params) {
  * 查询
  */
 export async function postListInit(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/List`, {
+  return request(`${ip}/WebAPI/api/TimePPR/List`, {
     method: 'POST',
     data: { ...params },
   });
 }
 
 
-
+ 
 /**
  * 新建保存
  */
- export async function addPost(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/Add`, {
+export async function addPost(params) {
+  return request(`${ip}/WebAPI/api/TimeShiftParts/Add`, {
     method: 'POST',
     data: { ...params },
   });
@@ -56,27 +42,27 @@ export async function postListInit(params) {
 /**
  * 编辑保存
  */
- export async function updatePut(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/Modify`, {
+export async function updatePut(params) {
+  return request(`${ip}/WebAPI/api/TimePPR/Modify`, {
     method: 'POST',
     data: { ...params },
   });
 }
- 
+
 
 
 /**
  * 删除
  */
 export async function deleted(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/Delete`, {
+  return request(`${ip}/WebAPI/api/TimeShiftParts/Delete`, {
     method: 'POST',
     data: { ...params },
   });
 }
- 
 
- 
+
+
 
 
 

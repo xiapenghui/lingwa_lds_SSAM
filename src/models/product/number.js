@@ -7,6 +7,7 @@ import {
   deleted,
   getAddDropDownInit,
   addPost,
+  GetproductnoText,
 } from "@/services/product/number";
 import { setAuthority } from "@/utils/authority";
 import { getPageQuery } from "@/utils/utils";
@@ -20,6 +21,7 @@ const Model = {
     TableList: [],
     isNoList: {},
     ProductTypeListTrue: {},
+    ProductNoList: [],
   },
 
   subscriptions: {
@@ -33,6 +35,11 @@ const Model = {
 
           dispatch({
             type: "getProductTypeTrue",
+            payload: {},
+          });
+
+          dispatch({
+            type: "GetproductnoText",
             payload: {},
           });
         }
@@ -55,6 +62,23 @@ const Model = {
           payload: {
             type: "getDropDownInit",
             data: data.data,
+          },
+        });
+        return message.success(data.message);
+      }
+    },
+
+    //获取PPR类型
+    *GetproductnoText({ payload }, { call, put, select }) {
+      const data = yield call(GetproductnoText);
+      if (data.status !== "200") {
+        return message.error(data.message);
+      } else if (data.status == "200") {
+        yield put({
+          type: "querySuccessed",
+          payload: {
+            type: "GetproductnoText",
+            data: data.list,
           },
         });
         return message.success(data.message);
@@ -101,14 +125,19 @@ const Model = {
           ...state,
           ...payload,
         };
-      }
-      else if (payload.type === "getProductTypeTrue") {
+      } else if (payload.type === "getProductTypeTrue") {
         return {
-          ...state, ...payload,
-          ProductTypeListTrue: payload.data
-        }
-      }
-      else if (payload.type === "postListInit") {
+          ...state,
+          ...payload,
+          ProductTypeListTrue: payload.data,
+        };
+      } else if (payload.type === "GetproductnoText") {
+        return {
+          ...state,
+          ...payload,
+          ProductNoList: payload.data,
+        };
+      } else if (payload.type === "postListInit") {
         return {
           ...state,
           TableList: new Promise((resolve) => {

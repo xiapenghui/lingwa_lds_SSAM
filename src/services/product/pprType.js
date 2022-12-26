@@ -12,29 +12,11 @@ export async function getDropDownInit(params) {
     data: { ...params },
   });
 }
-
-//获取产品类型
-export async function getProductTypeTrue(params) {
-  return request(`${ip}/WebAPI/api/Common/GetproducttypeidText`, {
-    method: 'POST',
-    data: { ...params },
-  });
-}
- 
-
- //获取PPR类型
- export async function GetproductnoText(params) {
-  return request(`${ip}/WebAPI/api/Common/GetProductPPRText`, {
-    method: 'POST',
-    data: { ...params },
-  });
-}
-
 /**
  * 查询
  */
 export async function postListInit(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/List`, {
+  return request(`${ip}/WebAPI/api/PPRType/List`, {
     method: 'POST',
     data: { ...params },
   });
@@ -46,7 +28,7 @@ export async function postListInit(params) {
  * 新建保存
  */
  export async function addPost(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/Add`, {
+  return request(`${ip}/WebAPI/api/PPRType/Add`, {
     method: 'POST',
     data: { ...params },
   });
@@ -57,7 +39,7 @@ export async function postListInit(params) {
  * 编辑保存
  */
  export async function updatePut(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/Modify`, {
+  return request(`${ip}/WebAPI/api/PPRType/Modify`, {
     method: 'POST',
     data: { ...params },
   });
@@ -69,7 +51,7 @@ export async function postListInit(params) {
  * 删除
  */
 export async function deleted(params) {
-  return request(`${ip}/WebAPI/api/ProductProducts/Delete`, {
+  return request(`${ip}/WebAPI/api/PPRType/Delete`, {
     method: 'POST',
     data: { ...params },
   });

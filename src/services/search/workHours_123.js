@@ -43,7 +43,8 @@ export async function getShiftType() {
 
 //员工属性接口
 export async function  getPersonnel() {
-  return request(`${ip}/WebAPI/api/Common/GetEmployeePattributesIdText`, {
+   // return request(`${ip}/WebAPI/api/Common/GetEmployeePattributesIdText`, {
+    return request(`${ip}/WebAPI/api/Common/GetEmpPbutesIdForTHourText`, {
     method: 'POST',
   });
 }

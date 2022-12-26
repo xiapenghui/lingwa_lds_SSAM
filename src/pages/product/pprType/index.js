@@ -1,5 +1,5 @@
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { Button, message, Select } from 'antd';
+import { PlusOutlined ,UploadOutlined} from '@ant-design/icons';
+import { Button, message } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, connect } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -16,19 +16,17 @@ import {
   getAddDropDownInit,
   addPost,
   updatePut,
-} from '@/services/product/number';
+} from '@/services/product/pprType';
 
 const numberComponent = ({
-  number,
+  pprType,
   dispatch
 }) => {
   const {
     TableList,
     typeList,
     riskList,
-    ProductTypeListTrue,
-    ProductNoList,
-    isNoList, } = number
+    isNoList, } = pprType
   const [createModalVisible, handleModalVisible] = useState(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
   const actionRef = useRef();
@@ -40,74 +38,15 @@ const numberComponent = ({
   const [UpdateDate, setUpdateDate] = useState({});
   const [dataList, setDataList] = useState([]);
 
-
   const getColumns = () => [
 
 
     {
-      title: '产品编号',
-      dataIndex: 'productno',
+      title: 'PPR类型',
+      dataIndex: 'PPRNO',
       valueType: 'text',
       align: 'center',
-      initialValue: IsUpdate ? UpdateDate.productno : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '产品编号不能为空!',
-          },
-        ],
-      },
-    },
-
-    {
-      title: '产品名称',
-      dataIndex: 'productname',
-      valueType: 'text',
-      align: 'center',
-      initialValue: IsUpdate ? UpdateDate.productname : '',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '产品名称不能为空!',
-          },
-        ],
-      },
-    },
-
-
-    {
-      title: '产品类型',
-      dataIndex: 'producttypeid',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      hideInTable: true,
-      valueEnum: ProductTypeListTrue.length == 0 ? {} : ProductTypeListTrue,
-      initialValue: !IsUpdate ? '' : (UpdateDate.producttypeid ? UpdateDate.producttypeid.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(ProductTypeListTrue)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
+      initialValue: IsUpdate ? UpdateDate.PPRNO : '',
       formItemProps: {
         rules: [
           {
@@ -118,93 +57,33 @@ const numberComponent = ({
       },
     },
 
-    {
-      title: '产品类型',
-      dataIndex: 'producttype',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      hideInForm: true,
-    },
 
     {
-      title: 'PPR类型',
-      dataIndex: 'pprtypeid',
-      valueType: 'text',
+      title: 'PPR类型描述',
+      dataIndex: 'PPRDEC',
+      valueType: 'textarea',
       align: 'center',
+      initialValue: IsUpdate ? UpdateDate.PPRDEC : '',
       hideInSearch: true,
-      hideInTable: true,
-      valueEnum: ProductNoList.length == 0 ? {} : ProductNoList,
-      initialValue: !IsUpdate ? '' : (UpdateDate.pprtypeid ? UpdateDate.pprtypeid.toString() : ''),
-      renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        if (type === 'form' || type === 'table') {
-          // 返回新的组件
-          let newList = []
-          for (let [key, value] of Object.entries(ProductNoList)) {
-            newList.push({ key: key, label: value.text })
-          }
-          return <Select
-            allowClear
-            showSearch
-            optionFilterProp='children'
-          >
-            {newList.map(function (item, index) {
-              return <Select.Option key={index} value={item.key}>
-                {item.label}
-              </Select.Option>
-            })}
-          </Select>
-        }
-        return defaultRender(_);
-      },
       formItemProps: {
         rules: [
           {
             required: true,
-            message: 'PPR类型不能为空!',
+            message: '类型描述不能为空!',
           },
         ],
       },
     },
 
-
-    {
-      title: 'PPR类型',
-      dataIndex: 'pprtype',
-      valueType: 'text',
-      align: 'center',
-      hideInSearch: true,
-      hideInForm: true,
-    },
-
-    {
-      title: 'Cama',
-      dataIndex: 'cama',
-      valueType: 'digit',
-      align: 'center',
-      hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.cama : '',
-      render: (text, action) => {
-          return action.cama
-      },
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: 'Cama不能为空!',
-          },
-        ],
-      },
-    },
+  
 
     {
       title: '备注',
-      dataIndex: 'remark',
+      dataIndex: 'Remark',
       valueType: 'textarea',
       align: 'center',
-      width:200,
       hideInSearch: true,
-      initialValue: IsUpdate ? UpdateDate.remark : '',
+      initialValue: IsUpdate ? UpdateDate.Remark : '',
     },
 
 
@@ -227,9 +106,9 @@ const numberComponent = ({
   ];
 
   const query = async (params, sorter, filter) => {
+
     const TableList = postListInit({
-      productno: params.productno == null ? '' : params.productno,
-      productname: params.productname == null ? '' : params.productname,
+      PPRNO: params.PPRNO == null ? '' : params.PPRNO,
       PageIndex: params.current,
       PageSize: params.pageSize,
     })
@@ -245,6 +124,7 @@ const numberComponent = ({
     });
   };
 
+ 
   /**
    * 添加节点
    * @param fields
@@ -277,7 +157,7 @@ const numberComponent = ({
     const hide = message.loading('正在编辑');
     console.log('handleUpdate', fields)
     try {
-      let data = await updatePut({ productid: UpdateDate.productid, ...fields });
+      let data = await updatePut({ id: UpdateDate.id, ...fields });
       if (data.status == '200') {
         hide();
         message.success(data.message);
@@ -302,7 +182,7 @@ const numberComponent = ({
 
     try {
       let data = await deleted({
-        productids: selectedRows.map((row) => row.productid),
+        id: selectedRows.map((row) => row.id),
       });
 
       if (data.status == '200') {
@@ -328,12 +208,9 @@ const numberComponent = ({
     if (dataList.length > 0) {
       for (let i in dataList) {
         let obj = {
-          'productno': dataList[i].productno,
-          'productname': dataList[i].productname,
-          'producttype': dataList[i].producttype,
-          'cama': dataList[i].cama,
-          'pprtype':dataList[i].pprtype,
-          'remark': dataList[i].remark,
+          'PPRNO': dataList[i].PPRNO,
+          'PPRDEC': dataList[i].PPRDEC,
+          'remark':dataList[i].remark,
         }
         dataTable.push(obj);
       }
@@ -343,8 +220,8 @@ const numberComponent = ({
       {
         sheetData: dataTable,
         sheetName: 'sheet',
-        sheetFilter: ['productno', 'productname', 'producttype', 'cama', 'pprtype','remark'],
-        sheetHeader: ['产品编号', '产品名称', '产品类型', 'Cama', 'PPR类型','备注'],
+        sheetFilter: ['PPRNO', 'PPRDEC','remark'],
+        sheetHeader: ['PPR类型', 'PPR类型描述',  '备注'],
       }
     ];
 
@@ -361,7 +238,7 @@ const numberComponent = ({
         actionRef={actionRef}
         scroll={{ y: 500 }}
         pagination={false}
-        rowKey="productid"
+        rowKey="id"
         search={{
           labelWidth: 120,
 
@@ -371,8 +248,8 @@ const numberComponent = ({
             <PlusOutlined /> 新建
           </Button>,
           <Button type="primary" onClick={() => downloadExcel()}>
-            <UploadOutlined /> 导出
-          </Button>,
+          <UploadOutlined /> 导出
+        </Button>,
 
         ]}
         request={(params, sorter, filter) => query(params, sorter, filter)}
@@ -439,7 +316,7 @@ const numberComponent = ({
               }
             }
           }}
-          rowKey="productid"
+          rowKey="id"
           type="form"
           columns={getColumns()}
         />
@@ -468,7 +345,7 @@ const numberComponent = ({
                 }
               }
             }}
-            rowKey="productid"
+            rowKey="id"
             type="form"
             columns={getColumns()}
 
@@ -480,7 +357,7 @@ const numberComponent = ({
   );
 };
 
-export default connect(({ number }) => ({ number }))(numberComponent);
+export default connect(({ pprType }) => ({ pprType }))(numberComponent);
 
 
 

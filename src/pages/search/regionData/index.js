@@ -63,7 +63,7 @@ const regionDataComponent = ({ regionData, dispatch }) => {
     },
 
     {
-      title: "区域",
+      title: "产品族",
       dataIndex: "productarea",
       align: "center",
       width: 100,
@@ -357,7 +357,7 @@ const regionDataComponent = ({ regionData, dispatch }) => {
     },
 
     {
-      title: "区域",
+      title: "产品族",
       dataIndex: "productareaid",
       valueType: "text",
       align: "center",
@@ -872,7 +872,7 @@ const regionDataComponent = ({ regionData, dispatch }) => {
         ],
         sheetHeader: [
           "班次",
-          "区域",
+          "产品族",
           "日期",
           "UT",
           "DT",
